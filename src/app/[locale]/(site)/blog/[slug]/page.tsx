@@ -23,13 +23,13 @@ export async function generateMetadata({
     title: post.metaTitle,
     description: post.metaDescription,
     alternates: {
-      canonical: `/blog/${post.slug}`,
+      canonical: `https://dvphotofix.netlify.app/blog/${post.slug}`,
     },
     openGraph: {
       title: post.metaTitle,
       description: post.metaDescription,
       type: "article",
-      url: `/blog/${post.slug}`,
+      url: `https://dvphotofix.netlify.app/blog/${post.slug}`,
     },
     twitter: {
       card: "summary_large_image",
@@ -52,7 +52,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     dateModified: post.publishedISO,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `/blog/${post.slug}`,
+      "@id": `https://dvphotofix.netlify.app/blog/${post.slug}`,
     },
     author: {
       "@type": "Organization",

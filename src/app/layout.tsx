@@ -13,28 +13,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://dvphotofix.com"),
+  metadataBase: new URL("https://dvphotofix.netlify.app"),
   verification: {
     google: "utgZdG4Ae0y6EJkTxB1n-t6_yIcp5SrjBsBj6k-E7VQ",
   },
   title: {
-    default: "DV Photo Fix — Browser DV Lottery Photo Tool",
+    default: "DV Photo Fix",
     template: "%s | DV Photo Fix",
   },
-  description:
-    "A fast, browser-side DV Lottery photo checker and safe fixer. Not affiliated with the U.S. government.",
+  description: "DV Lottery photo tool: crop, center, resize to 600x600 correctly.",
   openGraph: {
     type: "website",
     siteName: "DV Photo Fix",
-    title: "DV Photo Fix — Browser DV Lottery Photo Tool",
-    description:
-      "Check issues, apply safe fixes, and export a DV-ready JPEG in your browser. Not affiliated with the U.S. government.",
+    title: "DV Photo Fix",
+    description: "DV Lottery photo tool: crop, center, resize to 600x600 correctly.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "DV Photo Fix — Browser DV Lottery Photo Tool",
-    description:
-      "Check issues, apply safe fixes, and export a DV-ready JPEG in your browser. Not affiliated with the U.S. government.",
+    title: "DV Photo Fix",
+    description: "DV Lottery photo tool: crop, center, resize to 600x600 correctly.",
   },
 }
 

@@ -4,19 +4,19 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Privacy policy for dvphotofix.com.",
+  description: "Privacy policy for dvphotofix.netlify.app.",
   alternates: {
-    canonical: "/privacy",
+    canonical: "https://dvphotofix.netlify.app/privacy",
   },
   openGraph: {
     title: "Privacy Policy",
-    description: "Privacy policy for dvphotofix.com.",
-    url: "/privacy",
+    description: "Privacy policy for dvphotofix.netlify.app.",
+    url: "https://dvphotofix.netlify.app/privacy",
   },
   twitter: {
     card: "summary_large_image",
     title: "Privacy Policy",
-    description: "Privacy policy for dvphotofix.com.",
+    description: "Privacy policy for dvphotofix.netlify.app.",
   },
 }
 

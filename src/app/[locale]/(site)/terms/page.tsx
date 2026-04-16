@@ -4,19 +4,19 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export const metadata: Metadata = {
   title: "Terms",
-  description: "Terms of use for dvphotofix.com.",
+  description: "Terms of use for dvphotofix.netlify.app.",
   alternates: {
-    canonical: "/terms",
+    canonical: "https://dvphotofix.netlify.app/terms",
   },
   openGraph: {
     title: "Terms",
-    description: "Terms of use for dvphotofix.com.",
-    url: "/terms",
+    description: "Terms of use for dvphotofix.netlify.app.",
+    url: "https://dvphotofix.netlify.app/terms",
   },
   twitter: {
     card: "summary_large_image",
     title: "Terms",
-    description: "Terms of use for dvphotofix.com.",
+    description: "Terms of use for dvphotofix.netlify.app.",
   },
 }
 
@@ -34,7 +34,7 @@ export default function TermsPage() {
             <CardTitle>Not a government service</CardTitle>
           </CardHeader>
           <CardContent className="text-[15px] leading-7 text-slate-800">
-            dvphotofix.com is an independent website. It is not affiliated with the U.S. government and does not
+            dvphotofix.netlify.app is an independent website. It is not affiliated with the U.S. government and does not
             represent the DV Program.
           </CardContent>
         </Card>
@@ -70,7 +70,7 @@ export default function TermsPage() {
             <CardTitle>Liability limitation</CardTitle>
           </CardHeader>
           <CardContent className="text-[15px] leading-7 text-slate-800">
-            To the maximum extent permitted by law, dvphotofix.com is not liable for losses resulting from the use of the
+            To the maximum extent permitted by law, dvphotofix.netlify.app is not liable for losses resulting from the use of the
             site or tool.
           </CardContent>
         </Card>

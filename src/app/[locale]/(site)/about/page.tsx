@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: "About",
   description: "About DV Photo Fix and how the photo tool works.",
   alternates: {
-    canonical: "/about",
+    canonical: "https://dvphotofix.netlify.app/about",
   },
   openGraph: {
     title: "About DV Photo Fix",
     description: "About DV Photo Fix and how the photo tool works.",
-    url: "/about",
+    url: "https://dvphotofix.netlify.app/about",
   },
   twitter: {
     card: "summary_large_image",
@@ -35,7 +35,7 @@ export default function AboutPage() {
             <CardTitle>Ownership</CardTitle>
           </CardHeader>
           <CardContent className="text-[15px] leading-7 text-slate-800">
-            dvphotofix.com is operated by an independent private owner. It is not affiliated with any U.S. government
+            dvphotofix.netlify.app is operated by an independent private owner. It is not affiliated with any U.S. government
             agency. If you need to reach the site operator, use the Contact page.
           </CardContent>
         </Card>

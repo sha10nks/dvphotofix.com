@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   title: "Editorial & Sources",
   description: "How content is maintained and which sources are referenced.",
   alternates: {
-    canonical: "/editorial",
+    canonical: "https://dvphotofix.netlify.app/editorial",
   },
   openGraph: {
     title: "Editorial & Sources",
     description: "How content is maintained and which sources are referenced.",
-    url: "/editorial",
+    url: "https://dvphotofix.netlify.app/editorial",
   },
   twitter: {
     card: "summary_large_image",

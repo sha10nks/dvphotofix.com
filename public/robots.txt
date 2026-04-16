@@ -1,8 +1,4 @@
 User-agent: *
 Allow: /
 
-Disallow: /api/
-Disallow: /private/
-
-Sitemap: https://dvphotofix.com/sitemap.xml
-
+Sitemap: https://dvphotofix.netlify.app/sitemap.xml

@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   title: "Contact",
   description: "Contact DV Photo Fix for support or legal requests.",
   alternates: {
-    canonical: "/contact",
+    canonical: "https://dvphotofix.netlify.app/contact",
   },
   openGraph: {
     title: "Contact",
     description: "Contact DV Photo Fix for support or legal requests.",
-    url: "/contact",
+    url: "https://dvphotofix.netlify.app/contact",
   },
   twitter: {
     card: "summary_large_image",
@@ -102,8 +102,8 @@ export default function ContactPage({ searchParams }: { searchParams?: { success
 
             <div className="text-sm text-slate-700">
               Prefer email? —
-              <a className="font-medium text-blue-700 hover:text-blue-800" href="mailto:support@dvphotofix.com">
-                support@dvphotofix.com
+              <a className="font-medium text-blue-700 hover:text-blue-800" href="mailto:support@dvphotofix.netlify.app">
+                support@dvphotofix.netlify.app
               </a>
             </div>
 

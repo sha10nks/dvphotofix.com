@@ -7,12 +7,12 @@ export const metadata: Metadata = {
   title: "FAQ",
   description: "Answers to common DV Lottery photo questions for applicants.",
   alternates: {
-    canonical: "/faq",
+    canonical: "https://dvphotofix.netlify.app/faq",
   },
   openGraph: {
     title: "DV Lottery FAQ — Photos, Rules, Tool",
     description: "Answers to common DV Lottery photo questions for applicants.",
-    url: "/faq",
+    url: "https://dvphotofix.netlify.app/faq",
   },
   twitter: {
     card: "summary_large_image",

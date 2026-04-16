@@ -10,13 +10,13 @@ export const metadata: Metadata = {
   description:
     "DV Lottery photo requirements explained in plain language: 600×600 size, JPEG, file size limits, head size, background rules, lighting, glasses, and common rejection reasons.",
   alternates: {
-    canonical: "/photo-requirements",
+    canonical: "https://dvphotofix.netlify.app/photo-requirements",
   },
   openGraph: {
     title: "DV Photo Requirements — Size, Format, Framing, Background",
     description:
       "DV Lottery photo requirements explained in plain language: 600×600 size, JPEG, file size limits, head size, background rules, lighting, glasses, and common rejection reasons.",
-    url: "/photo-requirements",
+    url: "https://dvphotofix.netlify.app/photo-requirements",
   },
   twitter: {
     card: "summary_large_image",
