@@ -1,0 +1,67 @@
+{
+  "site": {
+    "name": "DV Photo Fix",
+    "tagline": "Revisa y prepara tu foto de DV Lottery en tu navegador."
+  },
+  "nav": {
+    "tool": "Herramienta",
+    "requirements": "Requisitos de foto",
+    "faq": "Preguntas",
+    "updates": "Actualizaciones",
+    "blog": "Blog",
+    "about": "Acerca de",
+    "contact": "Contacto"
+  },
+  "disclaimer": {
+    "banner": "No afiliado al gobierno de EE. UU. Sitio independiente del sector privado.",
+    "blockTitle": "Aviso importante",
+    "bullets": {
+      "notOfficial": "Este sitio no es oficial ni está afiliado al gobierno de EE. UU.",
+      "noApply": "Este sitio no realiza la solicitud en tu nombre.",
+      "noGuarantee": "Este sitio no garantiza el éxito de ninguna solicitud.",
+      "notReplace": "Este sitio no reemplaza las instrucciones oficiales.",
+      "verify": "Debes verificar todas las reglas en las páginas del Programa DV del Departamento de Estado de EE. UU."
+    },
+    "sourceLink": "Abrir las páginas del Programa DV del Departamento de Estado de EE. UU."
+  },
+  "home": {
+    "h1": "Revisa y prepara tu foto de DV Lottery en tu navegador.",
+    "sub": "Comprobaciones rápidas locales, arreglos seguros y exportación JPEG lista — con avisos claros cuando debes repetir la foto.",
+    "ctaPrimary": "Iniciar la herramienta",
+    "ctaSecondary": "Leer requisitos",
+    "sourceNote": "Resumen basado en la guía del Programa DV del Departamento de Estado de EE. UU. Última revisión: {date}."
+  },
+  "email": {
+    "title": "Recibe avisos cuando se publiquen actualizaciones y cuando se abra el periodo de registro.",
+    "emailLabel": "Correo",
+    "consent": "Acepto recibir actualizaciones",
+    "privacyNote": "Puedes darte de baja en cualquier momento. Ver Política de privacidad.",
+    "submit": "Avisarme",
+    "success": "Gracias — ya estás en la lista.",
+    "error": "Ocurrió un error. Inténtalo de nuevo."
+  },
+  "ads": {
+    "label": "Advertisement",
+    "loading": "Loading"
+  },
+  "tool": {
+    "title": "Herramienta de cumplimiento de foto DV",
+    "privacy": "El procesamiento ocurre localmente en tu navegador.",
+    "upload": "Subir foto",
+    "supported": "JPG / PNG / formatos comunes",
+    "analyze": "Analizar",
+    "fix": "Aplicar arreglos seguros",
+    "download": "Descargar JPEG",
+    "recheck": "Revisar",
+    "startOver": "Empezar de nuevo"
+  },
+  "gate": {
+    "title": "Desbloquear la herramienta completa",
+    "description": "Envía tu email para recibir avisos de reapertura del DV y desbloquear la herramienta completa.",
+    "emailLabel": "Email",
+    "privacyNote": "Usamos tu email solo para notificaciones de actualizaciones del DV. Tu foto se queda en tu dispositivo.",
+    "notNow": "Ahora no",
+    "submit": "Enviar y desbloquear",
+    "error": "Algo salió mal. Inténtalo de nuevo."
+  }
+}

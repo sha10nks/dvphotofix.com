@@ -1,0 +1,67 @@
+{
+  "site": {
+    "name": "DV Photo Fix",
+    "tagline": "Check and prepare your DV Lottery photo in your browser."
+  },
+  "nav": {
+    "tool": "Tool",
+    "requirements": "Photo Requirements",
+    "faq": "FAQ",
+    "updates": "Updates",
+    "blog": "Blog",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "disclaimer": {
+    "banner": "Not affiliated with the U.S. government. This is an independent private-sector website.",
+    "blockTitle": "Important disclaimer",
+    "bullets": {
+      "notOfficial": "This website is not official and not affiliated with the U.S. government.",
+      "noApply": "This website does not apply on your behalf.",
+      "noGuarantee": "This website does not guarantee any application success.",
+      "notReplace": "This website does not replace the official instructions.",
+      "verify": "You must verify all rules on the U.S. Department of State DV pages."
+    },
+    "sourceLink": "Open the U.S. Department of State DV Program pages"
+  },
+  "home": {
+    "h1": "Check and prepare your DV Lottery photo in your browser.",
+    "sub": "Fast local checks, safe fixes, and a DV-ready JPEG export — with clear warnings when you should retake the photo.",
+    "ctaPrimary": "Start the Photo Tool",
+    "ctaSecondary": "Read Photo Requirements",
+    "sourceNote": "Rules summary based on the U.S. Department of State DV guidance. Last reviewed: {date}."
+  },
+  "email": {
+    "title": "Get notified when DV Lottery updates are published and when the registration window opens.",
+    "emailLabel": "Email",
+    "consent": "I agree to receive updates",
+    "privacyNote": "You can unsubscribe anytime. See Privacy Policy.",
+    "submit": "Notify me",
+    "success": "Thanks — you’re on the list.",
+    "error": "Something went wrong. Please try again."
+  },
+  "ads": {
+    "label": "Advertisement",
+    "loading": "Loading"
+  },
+  "tool": {
+    "title": "DV Photo Compliance Tool",
+    "privacy": "Processing happens locally in your browser by default.",
+    "upload": "Upload photo",
+    "supported": "JPG / PNG / common phone photo formats",
+    "analyze": "Analyze",
+    "fix": "Apply safe fixes",
+    "download": "Download DV-ready JPEG",
+    "recheck": "Recheck",
+    "startOver": "Start over"
+  },
+  "gate": {
+    "title": "Unlock the full tool",
+    "description": "Submit your email to get notified when DV reopening updates are published and to unlock the full tool.",
+    "emailLabel": "Email",
+    "privacyNote": "We only use your email for DV Lottery update notifications. Your photo stays on your device.",
+    "notNow": "Not now",
+    "submit": "Submit & unlock",
+    "error": "Something went wrong. Please try again."
+  }
+}

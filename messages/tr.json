@@ -1,0 +1,67 @@
+{
+  "site": {
+    "name": "DV Photo Fix",
+    "tagline": "DV Lottery fotoğrafınızı tarayıcıda kontrol edin ve hazırlayın."
+  },
+  "nav": {
+    "tool": "Araç",
+    "requirements": "Fotoğraf Kuralları",
+    "faq": "SSS",
+    "updates": "Güncellemeler",
+    "blog": "Blog",
+    "about": "Hakkında",
+    "contact": "İletişim"
+  },
+  "disclaimer": {
+    "banner": "ABD hükümetiyle bağlantılı değildir. Bağımsız özel sektör sitesi.",
+    "blockTitle": "Önemli uyarı",
+    "bullets": {
+      "notOfficial": "Bu site resmi değildir ve ABD hükümetiyle bağlantılı değildir.",
+      "noApply": "Sizin adınıza başvuru yapmaz.",
+      "noGuarantee": "Başarı garantisi vermez.",
+      "notReplace": "Resmi talimatların yerine geçmez.",
+      "verify": "Tüm kuralları ABD Dışişleri Bakanlığı DV sayfalarından doğrulayın."
+    },
+    "sourceLink": "ABD Dışişleri Bakanlığı DV Programı sayfalarını aç"
+  },
+  "home": {
+    "h1": "DV Lottery fotoğrafınızı tarayıcıda kontrol edin ve hazırlayın.",
+    "sub": "Hızlı yerel kontrol, güvenli düzeltmeler ve JPEG çıktı — yeniden çekmeniz gerektiğinde açık uyarılar.",
+    "ctaPrimary": "Aracı başlat",
+    "ctaSecondary": "Kuralları oku",
+    "sourceNote": "Özet, ABD Dışişleri Bakanlığı DV rehberine dayanır. Son kontrol: {date}."
+  },
+  "email": {
+    "title": "DV güncellemeleri ve kayıt dönemi açılışı için bildirim alın.",
+    "emailLabel": "E-posta",
+    "consent": "Güncellemeleri almayı kabul ediyorum",
+    "privacyNote": "İstediğiniz zaman çıkabilirsiniz. Gizlilik Politikasına bakın.",
+    "submit": "Beni bilgilendir",
+    "success": "Teşekkürler — listeye eklendiniz.",
+    "error": "Bir hata oluştu. Tekrar deneyin."
+  },
+  "ads": {
+    "label": "Advertisement",
+    "loading": "Loading"
+  },
+  "tool": {
+    "title": "DV fotoğraf uygunluk aracı",
+    "privacy": "İşlem tarayıcıda yerel yapılır.",
+    "upload": "Fotoğraf yükle",
+    "supported": "JPG / PNG / yaygın formatlar",
+    "analyze": "Analiz",
+    "fix": "Güvenli düzeltmeler",
+    "download": "JPEG indir",
+    "recheck": "Yeniden kontrol",
+    "startOver": "Baştan"
+  },
+  "gate": {
+    "title": "Tam aracı aç",
+    "description": "DV yeniden açılış güncellemeleri için e-postanı gönder ve tam aracı aç.",
+    "emailLabel": "E-posta",
+    "privacyNote": "E-postanı sadece DV güncelleme bildirimleri için kullanırız. Fotoğrafın cihazında kalır.",
+    "notNow": "Şimdi değil",
+    "submit": "Gönder ve aç",
+    "error": "Bir şeyler ters gitti. Lütfen tekrar dene."
+  }
+}

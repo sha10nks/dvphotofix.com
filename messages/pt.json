@@ -1,0 +1,67 @@
+{
+  "site": {
+    "name": "DV Photo Fix",
+    "tagline": "Verifique e prepare sua foto do DV Lottery no seu navegador."
+  },
+  "nav": {
+    "tool": "Ferramenta",
+    "requirements": "Requisitos",
+    "faq": "FAQ",
+    "updates": "Atualizações",
+    "blog": "Blog",
+    "about": "Sobre",
+    "contact": "Contato"
+  },
+  "disclaimer": {
+    "banner": "Não afiliado ao governo dos EUA. Site independente do setor privado.",
+    "blockTitle": "Aviso importante",
+    "bullets": {
+      "notOfficial": "Este site não é oficial e não é afiliado ao governo dos EUA.",
+      "noApply": "Este site não faz inscrição por você.",
+      "noGuarantee": "Este site não garante nenhum resultado.",
+      "notReplace": "Este site não substitui as instruções oficiais.",
+      "verify": "Verifique todas as regras nas páginas do Programa DV do Departamento de Estado dos EUA."
+    },
+    "sourceLink": "Abrir as páginas do Programa DV do Departamento de Estado dos EUA"
+  },
+  "home": {
+    "h1": "Verifique e prepare sua foto do DV Lottery no seu navegador.",
+    "sub": "Verificações locais rápidas, ajustes seguros e exportação JPEG pronta — com avisos claros quando você deve tirar outra foto.",
+    "ctaPrimary": "Iniciar ferramenta",
+    "ctaSecondary": "Ler requisitos",
+    "sourceNote": "Resumo baseado nas orientações do Programa DV do Departamento de Estado dos EUA. Última revisão: {date}."
+  },
+  "email": {
+    "title": "Receba avisos quando saírem atualizações e quando o período de inscrição abrir.",
+    "emailLabel": "Email",
+    "consent": "Concordo em receber atualizações",
+    "privacyNote": "Você pode cancelar a qualquer momento. Veja a Política de privacidade.",
+    "submit": "Quero ser avisado",
+    "success": "Obrigado — você entrou na lista.",
+    "error": "Algo deu errado. Tente novamente."
+  },
+  "ads": {
+    "label": "Advertisement",
+    "loading": "Loading"
+  },
+  "tool": {
+    "title": "Ferramenta de conformidade da foto DV",
+    "privacy": "Processamento local no navegador.",
+    "upload": "Enviar foto",
+    "supported": "JPG / PNG / formatos comuns",
+    "analyze": "Analisar",
+    "fix": "Aplicar ajustes seguros",
+    "download": "Baixar JPEG",
+    "recheck": "Reverificar",
+    "startOver": "Recomeçar"
+  },
+  "gate": {
+    "title": "Desbloquear a ferramenta completa",
+    "description": "Envie seu email para receber avisos de reabertura do DV e desbloquear a ferramenta completa.",
+    "emailLabel": "Email",
+    "privacyNote": "Usamos seu email apenas para notificações de atualizações do DV. Sua foto fica no seu dispositivo.",
+    "notNow": "Agora não",
+    "submit": "Enviar e desbloquear",
+    "error": "Algo deu errado. Tente novamente."
+  }
+}
