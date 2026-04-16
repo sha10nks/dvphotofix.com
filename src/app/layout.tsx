@@ -14,6 +14,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://dvphotofix.com"),
+  verification: {
+    google: "utgZdG4Ae0y6EJkTxB1n-t6_yIcp5SrjBsBj6k-E7VQ",
+  },
   title: {
     default: "DV Photo Fix — Browser DV Lottery Photo Tool",
     template: "%s | DV Photo Fix",
