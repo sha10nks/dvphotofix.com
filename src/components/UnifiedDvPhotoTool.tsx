@@ -7,7 +7,7 @@ import { zipSync } from "fflate"
 
 import type { ChecklistItem, DvAnalysis, DvFixOptions } from "@/lib/dvPhotoRules"
 import { detectFace } from "@/lib/vision/detectFace"
-import { analyzeInWorker, fixInWorker } from "@/lib/workers/dvWorkerClient"
+import { fixInWorker } from "@/lib/workers/dvWorkerClient"
 import { getEmailGateState, recordSuccessfulDownload } from "@/lib/gate/emailGate"
 import { EmailGateModal } from "@/components/EmailGateModal"
 import { Button } from "@/components/ui/button"
@@ -30,7 +30,10 @@ type Item = {
   error?: string
   startedAt?: number
   readyAnnounced?: boolean
+  progress?: number
 }
+
+const CONCURRENCY_LIMIT = 3
 
 const OPTIONS: DvFixOptions = {
   cropToSquare: true,
@@ -150,6 +153,37 @@ function StatusBadge({ phase, issues }: { phase: Phase; issues: Item["issues"] }
   )
 }
 
+function ProgressCircle({ progress }: { progress: number }) {
+  const r = 40
+  const c = 2 * Math.PI * r
+  const dash = c
+  const offset = dash - (dash * progress) / 100
+  return (
+    <div className="my-6 flex flex-col items-center justify-center">
+      <div className="relative h-24 w-24">
+        <svg className="h-24 w-24 -rotate-90 transform" viewBox="0 0 96 96">
+          <circle cx="48" cy="48" r={r} stroke="#e5e7eb" strokeWidth="8" fill="transparent" />
+          <circle
+            cx="48"
+            cy="48"
+            r={r}
+            stroke="#2563eb"
+            strokeWidth="8"
+            fill="transparent"
+            strokeDasharray={dash}
+            strokeDashoffset={offset}
+            strokeLinecap="round"
+          />
+        </svg>
+        <div className="absolute inset-0 flex items-center justify-center text-lg font-semibold text-slate-900">
+          {progress}%
+        </div>
+      </div>
+      <p className="mt-2 text-sm text-slate-700">Processing images…</p>
+    </div>
+  )
+}
+
 function OverlayGuides({ overlay }: { overlay: DvAnalysis["overlay"] }) {
   if (!overlay) return null
   const box = overlay.faceBox
@@ -200,6 +234,12 @@ export function UnifiedDvPhotoTool({ locale }: { locale: string }) {
   const [gateOpen, setGateOpen] = React.useState(false)
   const pendingZipRef = React.useRef(false)
 
+  const readyCount = items.filter((i) => i.phase === "ready").length
+  const globalProgress = items.length
+    ? Math.round(items.reduce((acc, i) => acc + (i.phase === "ready" ? 100 : (i.progress ?? 0)), 0) / items.length)
+    : 0
+  const showGlobalProgress = items.length > 0 && readyCount < items.length
+
   const startTimerRef = React.useRef<number | null>(null)
   const queueRef = React.useRef<string[]>([])
   const activeRef = React.useRef(0)
@@ -233,13 +273,14 @@ export function UnifiedDvPhotoTool({ locale }: { locale: string }) {
   }
 
   async function drain() {
-    if (activeRef.current >= 2) return
+    if (activeRef.current >= CONCURRENCY_LIMIT) return
     const nextId = queueRef.current.shift()
     if (!nextId) return
     if (runningRef.current.has(nextId)) return
     runningRef.current.add(nextId)
     activeRef.current += 1
     try {
+      await sleep(0)
       await runPipeline(nextId)
     } finally {
       runningRef.current.delete(nextId)
@@ -252,37 +293,12 @@ export function UnifiedDvPhotoTool({ locale }: { locale: string }) {
     const item = itemsRef.current.get(id)
     if (!item) return
     const startedAt = Date.now()
-    setItem(id, { phase: "uploading", startedAt, issues: "unknown" })
+    setItem(id, { phase: "uploading", startedAt, issues: "unknown", progress: 1 })
 
     const detectionPromise = detectFace(item.file).catch(() => null)
-    const analysisPromise = (async () => {
-      const det = await detectionPromise
-      return await analyzeInWorker({ file: item.file, detection: det })
-    })()
 
-    await sleep(800)
-    setItem(id, { phase: "analyzing" })
+    setItem(id, { phase: "analyzing", progress: 5 })
 
-    let analysis: DvAnalysis | null = null
-    const analyzeStart = Date.now()
-    try {
-      analysis = await analysisPromise
-    } catch (e) {
-      setItem(id, { phase: "error", error: e instanceof Error ? e.message : "Analyze failed" })
-      return
-    }
-    const analyzeElapsed = Date.now() - analyzeStart
-    if (analyzeElapsed < 3500) await sleep(3500 - analyzeElapsed)
-
-    const o = overall(analysis.checklist)
-    const issues = o === "pass" ? "none" : "some"
-    setItem(id, { phase: "issues", issues, analysis })
-    await sleep(2000)
-
-    setItem(id, { phase: "fixing" })
-    const fixStart = Date.now()
-
-    let previewUrl: string | undefined
     let lastPreviewUrl: string | undefined
     try {
       const det = await detectionPromise
@@ -290,9 +306,14 @@ export function UnifiedDvPhotoTool({ locale }: { locale: string }) {
         file: item.file,
         options: OPTIONS,
         detection: det,
+        onProgress: (p) => {
+          const v = Math.max(0, Math.min(1, p.value))
+          const pct = Math.max(1, Math.min(99, Math.round(v * 100)))
+          const phase: Phase = p.stage === "reframe" || p.stage === "encode" ? "fixing" : "analyzing"
+          setItem(id, { phase, progress: pct })
+        },
         onPreview: (p) => {
           const u = URL.createObjectURL(p.blob)
-          previewUrl = u
           setItems((prev) =>
             prev.map((it) => {
               if (it.id !== id) return it
@@ -309,29 +330,26 @@ export function UnifiedDvPhotoTool({ locale }: { locale: string }) {
       setItems((prev) =>
         prev.map((it) => {
           if (it.id !== id) return it
+          const o = overall(res.analysis.checklist)
+          const issues = o === "pass" ? "none" : "some"
           return {
             ...it,
             outputBlob: res.blob,
             outputUrl,
             displayBytes: res.blob.size,
             analysis: res.analysis,
+            issues,
           }
         }),
       )
 
       if (lastPreviewUrl && lastPreviewUrl !== outputUrl) URL.revokeObjectURL(lastPreviewUrl)
 
-      const fixElapsed = Date.now() - fixStart
-      if (fixElapsed < 10_000) await sleep(10_000 - fixElapsed)
-
-      setItem(id, { phase: "finalizing" })
-      await sleep(10_000)
-
-      setItem(id, { phase: "ready" })
+      setItem(id, { phase: "finalizing", progress: 99 })
+      await sleep(0)
+      setItem(id, { phase: "ready", progress: 100 })
       play()
     } catch (e) {
-      const fixElapsed = Date.now() - fixStart
-      if (fixElapsed < 10_000) await sleep(10_000 - fixElapsed)
       setItem(id, { phase: "error", error: e instanceof Error ? e.message : "Fix failed" })
     }
   }
@@ -348,7 +366,7 @@ export function UnifiedDvPhotoTool({ locale }: { locale: string }) {
         .filter((i) => i.phase === "queued")
         .map((i) => i.id)
       if (ids.length) enqueue(ids)
-    }, 1000)
+    }, 50)
   }
 
   function onFiles(files: FileList | null) {
@@ -367,6 +385,7 @@ export function UnifiedDvPhotoTool({ locale }: { locale: string }) {
         originalUrl,
         phase: "queued",
         issues: "unknown",
+        progress: 0,
       }
     })
     setItems((prev) => [...added, ...prev])
@@ -411,13 +430,13 @@ export function UnifiedDvPhotoTool({ locale }: { locale: string }) {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       <EmailGateModal open={gateOpen} onOpenChange={setGateOpen} locale={locale} onConsented={handleConsented} />
 
-      <div className="space-y-3">
+      <div className="space-y-4">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div className="space-y-1">
-            <h2 className="text-[20px] font-semibold leading-tight text-slate-900">Upload photos</h2>
+            <h2 className="text-[22px] font-semibold leading-relaxed text-slate-900">Upload photos</h2>
             <p className="max-w-2xl text-[15px] leading-7 text-slate-700">
               Upload 1–10 photos. Processing starts automatically. Each photo is formatted locally using safe transforms
               only.
@@ -435,10 +454,14 @@ export function UnifiedDvPhotoTool({ locale }: { locale: string }) {
         </div>
       </div>
 
+      {showGlobalProgress ? <ProgressCircle progress={globalProgress} /> : null}
+
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <AnimatePresence initial={false}>
           {items.map((item) => {
             const shown = item.outputUrl ?? item.previewUrl ?? item.originalUrl
+            const pct = item.phase === "ready" ? 100 : (item.progress ?? 0)
+            const showProgress = item.phase !== "ready" && item.phase !== "error"
             return (
               <motion.div
                 key={item.id}
@@ -448,7 +471,7 @@ export function UnifiedDvPhotoTool({ locale }: { locale: string }) {
                 exit={{ opacity: 0, y: 8 }}
                 className="space-y-3"
               >
-                <div className="rounded-[12px] border border-[#e5e5e5] bg-[#f5f5f5] p-4">
+                <div className="rounded-[12px] border border-slate-200 bg-slate-100 p-4">
                   <div className="relative aspect-square overflow-hidden rounded-[10px] bg-white">
                     <img src={shown} alt={item.fileName} className="absolute inset-0 h-full w-full object-contain" />
                     <OverlayGuides overlay={item.analysis?.overlay} />
@@ -460,6 +483,14 @@ export function UnifiedDvPhotoTool({ locale }: { locale: string }) {
                     <div className="truncate text-[13px] text-slate-700">{item.fileName}</div>
                     <div className="text-[13px] text-slate-600">{kb(item.displayBytes)} kB</div>
                     {item.error ? <div className="mt-1 text-[13px] text-red-700">{item.error}</div> : null}
+                    {showProgress ? (
+                      <div className="mt-2">
+                        <div className="h-2 w-full rounded-full bg-slate-200">
+                          <div className="h-2 rounded-full bg-blue-600 transition-[width]" style={{ width: `${pct}%` }} />
+                        </div>
+                        <div className="mt-1 text-[12px] font-medium text-slate-700">{pct}%</div>
+                      </div>
+                    ) : null}
                   </div>
                   <AnimatePresence mode="popLayout" initial={false}>
                     <motion.div
@@ -484,7 +515,7 @@ export function UnifiedDvPhotoTool({ locale }: { locale: string }) {
         <div className="text-[15px] text-slate-700">
           {items.length ? (
             <span>
-              {items.filter((i) => i.phase === "ready").length}/{items.length} ready
+              {readyCount}/{items.length} ready
             </span>
           ) : (
             <span>Upload photos to begin.</span>

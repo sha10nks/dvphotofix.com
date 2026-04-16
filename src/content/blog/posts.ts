@@ -111,9 +111,6 @@ function renderArticle(args: {
     `- Open the tool to reframe and format your photo safely: [DV photo tool](/tool)`,
     `- Review the full requirements page: [Photo requirements](/photo-requirements)`,
     `- Read next: [${args.related.title}](${args.related.href})`,
-    "",
-    "### CTA",
-    "Check and fix your DV photo using the tool: [Open the tool](/tool)",
   ]
 
   return body.join("\n")
@@ -370,6 +367,30 @@ const FILLER_SLUGS = [
   "dv-photo-safe-edits-only",
   "dv-photo-export-jpeg",
   "dv-photo-upload-errors",
+  "dv-photo-file-too-large",
+  "dv-photo-file-too-small",
+  "dv-photo-wrong-aspect-ratio",
+  "dv-photo-wrong-size",
+  "dv-photo-not-jpeg",
+  "dv-photo-background-shadow-fix",
+  "dv-photo-face-not-centered",
+  "dv-photo-tilt-angle",
+  "dv-photo-head-too-close",
+  "dv-photo-head-too-far",
+  "dv-photo-low-resolution",
+  "dv-photo-compression-artifacts",
+  "dv-photo-over-edited",
+  "dv-photo-background-replacement-risk",
+  "dv-photo-how-to-crop-600x600",
+  "dv-photo-how-to-compress-240kb",
+  "dv-photo-best-camera-settings",
+  "dv-photo-indoor-lighting",
+  "dv-photo-window-lighting",
+  "dv-photo-plain-background-setup",
+  "dv-photo-shoulders-cut-off",
+  "dv-photo-hair-clipped",
+  "dv-photo-chin-cut-off",
+  "dv-photo-what-if-face-detection-fails",
 ]
 
 function makeGenericTopic(slug: string): Topic {
@@ -411,7 +432,7 @@ const ALL_TOPICS: Topic[] = (() => {
   for (const slug of FILLER_SLUGS) {
     if (!map.has(slug)) map.set(slug, makeGenericTopic(slug))
   }
-  return Array.from(map.values()).slice(0, 50)
+  return Array.from(map.values()).slice(0, 70)
 })()
 
 export const blogPosts: BlogPost[] = (() => {

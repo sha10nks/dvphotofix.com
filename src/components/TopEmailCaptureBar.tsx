@@ -83,6 +83,7 @@ export function TopEmailCaptureBar({ locale }: { locale: string }) {
               placeholder="name@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className="h-12 border-slate-300"
             />
           </div>
           <Button type="submit" disabled={status === "loading"}>

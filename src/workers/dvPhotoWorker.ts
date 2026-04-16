@@ -326,31 +326,38 @@ async function analyze(file: File, detectionInput?: FaceDetection | null): Promi
   post({ type: "progress", payload: { stage: "decode", value: 0.2 } })
   const bmp = await decodeBitmap(file)
 
+  const bmpW = bmp.width
+  const bmpH = bmp.height
+
   post({ type: "progress", payload: { stage: "draw", value: 0.35 } })
-  const { ctx } = makeOffscreen(bmp.width, bmp.height)
+  const { ctx } = makeOffscreen(bmpW, bmpH)
   ctx.drawImage(bmp, 0, 0)
-  const img = ctx.getImageData(0, 0, bmp.width, bmp.height)
+  try {
+    bmp.close()
+  } catch {
+  }
+  const img = ctx.getImageData(0, 0, bmpW, bmpH)
 
   post({ type: "progress", payload: { stage: "metrics", value: 0.6 } })
   const bg = sampleBackgroundMetrics(img)
   const detection = detectionInput ?? estimateFaceFallback(img)
   const faceDetected = Boolean(detection && detection.confidence >= 0.4)
-  const faceBoxPx = detection ? toPx(detection, bmp.width, bmp.height) : { x: bmp.width * 0.3, y: bmp.height * 0.22, w: bmp.width * 0.4, h: bmp.height * 0.28 }
-  const faceCenterX = (faceBoxPx.x + faceBoxPx.w / 2) / bmp.width
-  const faceCenterY = (faceBoxPx.y + faceBoxPx.h / 2) / bmp.height
-  const chinY = detection?.landmarks?.chin ? detection.landmarks.chin.y * bmp.height : faceBoxPx.y + faceBoxPx.h * 0.98
-  const foreheadY = detection?.landmarks?.foreheadTop ? detection.landmarks.foreheadTop.y * bmp.height : faceBoxPx.y + faceBoxPx.h * 0.06
+  const faceBoxPx = detection ? toPx(detection, bmpW, bmpH) : { x: bmpW * 0.3, y: bmpH * 0.22, w: bmpW * 0.4, h: bmpH * 0.28 }
+  const faceCenterX = (faceBoxPx.x + faceBoxPx.w / 2) / bmpW
+  const faceCenterY = (faceBoxPx.y + faceBoxPx.h / 2) / bmpH
+  const chinY = detection?.landmarks?.chin ? detection.landmarks.chin.y * bmpH : faceBoxPx.y + faceBoxPx.h * 0.98
+  const foreheadY = detection?.landmarks?.foreheadTop ? detection.landmarks.foreheadTop.y * bmpH : faceBoxPx.y + faceBoxPx.h * 0.06
   const headTopY = Math.min(foreheadY - faceBoxPx.h * 0.18, faceBoxPx.y - faceBoxPx.h * 0.12)
   const headHeight = Math.max(1, chinY - headTopY)
-  const headRatio = clamp(headHeight / bmp.height, 0.2, 0.95)
-  const topHeadroomRatio = clamp(headTopY / bmp.height, 0, 1)
+  const headRatio = clamp(headHeight / bmpH, 0.2, 0.95)
+  const topHeadroomRatio = clamp(headTopY / bmpH, 0, 1)
   const headTopClippedRisk = headTopY < 0 ? 1 : 0
   const tiltDeg = detection?.tiltDeg ?? 0
   const blurRisk = estimateBlurRisk(img)
 
   const checklist = buildChecklist({
-    w: bmp.width,
-    h: bmp.height,
+    w: bmpW,
+    h: bmpH,
     bytes: file.size,
     type: file.type,
     bgAvg: bg.avg,
@@ -375,15 +382,15 @@ async function analyze(file: File, detectionInput?: FaceDetection | null): Promi
 
   return {
     input: {
-      width: bmp.width,
-      height: bmp.height,
+      width: bmpW,
+      height: bmpH,
       bytes: file.size,
       type: file.type,
       name: file.name,
     },
     metrics: {
-      aspect: bmp.width / bmp.height,
-      isSquareish: Math.abs(bmp.width / bmp.height - 1) < 0.02,
+      aspect: bmpW / bmpH,
+      isSquareish: Math.abs(bmpW / bmpH - 1) < 0.02,
       backgroundLightnessAvg: bg.avg,
       backgroundLightnessStdDev: bg.std,
       faceDetected,
@@ -527,170 +534,177 @@ async function fix(file: File, options: DvFixOptions, detectionInput?: FaceDetec
   post({ type: "progress", payload: { stage: "reframe", value: 0.2 } })
 
   const bmp = await decodeBitmap(file)
-  let detection = detectionInput ?? null
-  if (!detection) {
-    const { ctx } = makeOffscreen(bmp.width, bmp.height)
-    ctx.drawImage(bmp, 0, 0)
-    const img = ctx.getImageData(0, 0, bmp.width, bmp.height)
-    detection = estimateFaceFallback(img)
-  }
-
-  const faceBox = detection ? toPx(detection, bmp.width, bmp.height) : { x: bmp.width * 0.3, y: bmp.height * 0.22, w: bmp.width * 0.4, h: bmp.height * 0.28 }
-  const leftEye =
-    toPxPoint(detection?.landmarks?.leftEye, bmp.width, bmp.height) ??
-    { x: faceBox.x + faceBox.w * 0.33, y: faceBox.y + faceBox.h * 0.42 }
-  const rightEye =
-    toPxPoint(detection?.landmarks?.rightEye, bmp.width, bmp.height) ??
-    { x: faceBox.x + faceBox.w * 0.67, y: faceBox.y + faceBox.h * 0.42 }
-  const chin =
-    toPxPoint(detection?.landmarks?.chin, bmp.width, bmp.height) ??
-    { x: faceBox.x + faceBox.w * 0.5, y: faceBox.y + faceBox.h * 0.98 }
-  const foreheadTop =
-    toPxPoint(detection?.landmarks?.foreheadTop, bmp.width, bmp.height) ??
-    { x: faceBox.x + faceBox.w * 0.5, y: faceBox.y + faceBox.h * 0.06 }
-
-  const params = computeReframeParams({
-    bmpW: bmp.width,
-    bmpH: bmp.height,
-    faceBox,
-    leftEye,
-    rightEye,
-    chin,
-    foreheadTop,
-    straighten: options.straighten,
-    tiltDeg: detection?.tiltDeg ?? inputAnalysis.metrics.tiltDeg,
-  })
-
-  const eyeC = { x: (leftEye.x + rightEye.x) / 2, y: (leftEye.y + rightEye.y) / 2 }
-  const fill = sampleCanvasFillColor(bmp)
-
-  const out = makeOffscreen(DV_RULES.target.width, DV_RULES.target.height)
-  out.ctx.imageSmoothingEnabled = true
-  out.ctx.imageSmoothingQuality = "high"
-  out.ctx.fillStyle = `rgb(${fill.r}, ${fill.g}, ${fill.b})`
-  out.ctx.fillRect(0, 0, DV_RULES.target.width, DV_RULES.target.height)
-
-  out.ctx.save()
-  out.ctx.translate(params.eyeTargetX, params.eyeTargetY)
-  out.ctx.rotate(params.tiltRad)
-  out.ctx.scale(params.scale, params.scale)
-  out.ctx.translate(-eyeC.x, -eyeC.y)
-  out.ctx.drawImage(bmp, 0, 0)
-  out.ctx.restore()
-
-  post({ type: "progress", payload: { stage: "encode", value: 0.7 } })
-
   try {
-    const previewBlob = await out.c.convertToBlob({ type: "image/jpeg", quality: 0.9 })
-    post({ type: "fix-preview", payload: { blob: previewBlob, bytes: previewBlob.size } })
-  } catch {
-  }
+    let detection = detectionInput ?? null
+    if (!detection) {
+      const { ctx } = makeOffscreen(bmp.width, bmp.height)
+      ctx.drawImage(bmp, 0, 0)
+      const img = ctx.getImageData(0, 0, bmp.width, bmp.height)
+      detection = estimateFaceFallback(img)
+    }
 
-  const encoded = options.compressToMaxBytes
-    ? await encodeJpegAdaptive(out.c, DV_RULES.target.maxBytes)
-    : { blob: await out.c.convertToBlob({ type: "image/jpeg", quality: 0.92 }), quality: 0.92, exceeded: false }
-  const blob = encoded.blob
+    const faceBox = detection ? toPx(detection, bmp.width, bmp.height) : { x: bmp.width * 0.3, y: bmp.height * 0.22, w: bmp.width * 0.4, h: bmp.height * 0.28 }
+    const leftEye =
+      toPxPoint(detection?.landmarks?.leftEye, bmp.width, bmp.height) ??
+      { x: faceBox.x + faceBox.w * 0.33, y: faceBox.y + faceBox.h * 0.42 }
+    const rightEye =
+      toPxPoint(detection?.landmarks?.rightEye, bmp.width, bmp.height) ??
+      { x: faceBox.x + faceBox.w * 0.67, y: faceBox.y + faceBox.h * 0.42 }
+    const chin =
+      toPxPoint(detection?.landmarks?.chin, bmp.width, bmp.height) ??
+      { x: faceBox.x + faceBox.w * 0.5, y: faceBox.y + faceBox.h * 0.98 }
+    const foreheadTop =
+      toPxPoint(detection?.landmarks?.foreheadTop, bmp.width, bmp.height) ??
+      { x: faceBox.x + faceBox.w * 0.5, y: faceBox.y + faceBox.h * 0.06 }
 
-  post({ type: "progress", payload: { stage: "done", value: 1 } })
+    const params = computeReframeParams({
+      bmpW: bmp.width,
+      bmpH: bmp.height,
+      faceBox,
+      leftEye,
+      rightEye,
+      chin,
+      foreheadTop,
+      straighten: options.straighten,
+      tiltDeg: detection?.tiltDeg ?? inputAnalysis.metrics.tiltDeg,
+    })
 
-  const cos = Math.cos(params.tiltRad)
-  const sin = Math.sin(params.tiltRad)
-  const transform = (x: number, y: number) => {
-    const dx = (x - eyeC.x) * params.scale
-    const dy = (y - eyeC.y) * params.scale
-    const rx = dx * cos - dy * sin
-    const ry = dx * sin + dy * cos
-    return { x: params.eyeTargetX + rx, y: params.eyeTargetY + ry }
-  }
+    const eyeC = { x: (leftEye.x + rightEye.x) / 2, y: (leftEye.y + rightEye.y) / 2 }
+    const fill = sampleCanvasFillColor(bmp)
 
-  const faceCorners = [
-    transform(faceBox.x, faceBox.y),
-    transform(faceBox.x + faceBox.w, faceBox.y),
-    transform(faceBox.x, faceBox.y + faceBox.h),
-    transform(faceBox.x + faceBox.w, faceBox.y + faceBox.h),
-  ]
-  const faceMinX = clamp(Math.min(...faceCorners.map((p) => p.x)), 0, DV_RULES.target.width)
-  const faceMaxX = clamp(Math.max(...faceCorners.map((p) => p.x)), 0, DV_RULES.target.width)
-  const faceMinY = clamp(Math.min(...faceCorners.map((p) => p.y)), 0, DV_RULES.target.height)
-  const faceMaxY = clamp(Math.max(...faceCorners.map((p) => p.y)), 0, DV_RULES.target.height)
+    const out = makeOffscreen(DV_RULES.target.width, DV_RULES.target.height)
+    out.ctx.imageSmoothingEnabled = true
+    out.ctx.imageSmoothingQuality = "high"
+    out.ctx.fillStyle = `rgb(${fill.r}, ${fill.g}, ${fill.b})`
+    out.ctx.fillRect(0, 0, DV_RULES.target.width, DV_RULES.target.height)
 
-  const leftEyeOut = transform(leftEye.x, leftEye.y)
-  const rightEyeOut = transform(rightEye.x, rightEye.y)
-  const chinOut = transform(chin.x, chin.y)
-  const headTopOut = transform(eyeC.x, params.headTopY)
+    out.ctx.save()
+    out.ctx.translate(params.eyeTargetX, params.eyeTargetY)
+    out.ctx.rotate(params.tiltRad)
+    out.ctx.scale(params.scale, params.scale)
+    out.ctx.translate(-eyeC.x, -eyeC.y)
+    out.ctx.drawImage(bmp, 0, 0)
+    out.ctx.restore()
 
-  const headRatio = clamp((chinOut.y - headTopOut.y) / DV_RULES.target.height, 0.2, 0.95)
-  const topHeadroomRatio = clamp(headTopOut.y / DV_RULES.target.height, 0, 1)
-  const headTopClippedRisk = headTopOut.y < 0 ? 1 : 0
-  const faceCenterX = clamp((faceMinX + faceMaxX) / 2 / DV_RULES.target.width, 0, 1)
-  const faceCenterY = clamp((faceMinY + faceMaxY) / 2 / DV_RULES.target.height, 0, 1)
+    post({ type: "progress", payload: { stage: "encode", value: 0.7 } })
 
-  const outImg = out.ctx.getImageData(0, 0, DV_RULES.target.width, DV_RULES.target.height)
-  const bg = sampleBackgroundMetrics(outImg)
-  const blurRisk = estimateBlurRisk(outImg)
-  const tiltDeg = (-params.tiltRad * 180) / Math.PI
+    try {
+      const previewBlob = await out.c.convertToBlob({ type: "image/jpeg", quality: 0.9 })
+      post({ type: "fix-preview", payload: { blob: previewBlob, bytes: previewBlob.size } })
+    } catch {
+    }
 
-  const checklist = buildChecklist({
-    w: DV_RULES.target.width,
-    h: DV_RULES.target.height,
-    bytes: blob.size,
-    type: "image/jpeg",
-    bgAvg: bg.avg,
-    bgStd: bg.std,
-    faceDetected: inputAnalysis.metrics.faceDetected,
-    cx: faceCenterX,
-    cy: faceCenterY,
-    headRatio,
-    topHeadroomRatio,
-    headTopClippedRisk,
-    tiltDeg,
-  })
+    const encoded = options.compressToMaxBytes
+      ? await encodeJpegAdaptive(out.c, DV_RULES.target.maxBytes)
+      : { blob: await out.c.convertToBlob({ type: "image/jpeg", quality: 0.92 }), quality: 0.92, exceeded: false }
+    const blob = encoded.blob
 
-  const notes = [
-    "Output is generated using safe transforms only: scale, reframe (eyes anchor), straighten (optional), and JPEG compression.",
-    encoded.exceeded ? "Could not reach target file size without heavy quality loss." : `JPEG quality used: ${encoded.quality.toFixed(2)}`,
-    ...inputAnalysis.notes,
-  ]
+    post({ type: "progress", payload: { stage: "done", value: 1 } })
 
-  const analysis: DvAnalysis = {
-    input: {
-      width: DV_RULES.target.width,
-      height: DV_RULES.target.height,
+    const cos = Math.cos(params.tiltRad)
+    const sin = Math.sin(params.tiltRad)
+    const transform = (x: number, y: number) => {
+      const dx = (x - eyeC.x) * params.scale
+      const dy = (y - eyeC.y) * params.scale
+      const rx = dx * cos - dy * sin
+      const ry = dx * sin + dy * cos
+      return { x: params.eyeTargetX + rx, y: params.eyeTargetY + ry }
+    }
+
+    const faceCorners = [
+      transform(faceBox.x, faceBox.y),
+      transform(faceBox.x + faceBox.w, faceBox.y),
+      transform(faceBox.x, faceBox.y + faceBox.h),
+      transform(faceBox.x + faceBox.w, faceBox.y + faceBox.h),
+    ]
+    const faceMinX = clamp(Math.min(...faceCorners.map((p) => p.x)), 0, DV_RULES.target.width)
+    const faceMaxX = clamp(Math.max(...faceCorners.map((p) => p.x)), 0, DV_RULES.target.width)
+    const faceMinY = clamp(Math.min(...faceCorners.map((p) => p.y)), 0, DV_RULES.target.height)
+    const faceMaxY = clamp(Math.max(...faceCorners.map((p) => p.y)), 0, DV_RULES.target.height)
+
+    const leftEyeOut = transform(leftEye.x, leftEye.y)
+    const rightEyeOut = transform(rightEye.x, rightEye.y)
+    const chinOut = transform(chin.x, chin.y)
+    const headTopOut = transform(eyeC.x, params.headTopY)
+
+    const headRatio = clamp((chinOut.y - headTopOut.y) / DV_RULES.target.height, 0.2, 0.95)
+    const topHeadroomRatio = clamp(headTopOut.y / DV_RULES.target.height, 0, 1)
+    const headTopClippedRisk = headTopOut.y < 0 ? 1 : 0
+    const faceCenterX = clamp((faceMinX + faceMaxX) / 2 / DV_RULES.target.width, 0, 1)
+    const faceCenterY = clamp((faceMinY + faceMaxY) / 2 / DV_RULES.target.height, 0, 1)
+
+    const outImg = out.ctx.getImageData(0, 0, DV_RULES.target.width, DV_RULES.target.height)
+    const bg = sampleBackgroundMetrics(outImg)
+    const blurRisk = estimateBlurRisk(outImg)
+    const tiltDeg = (-params.tiltRad * 180) / Math.PI
+
+    const checklist = buildChecklist({
+      w: DV_RULES.target.width,
+      h: DV_RULES.target.height,
       bytes: blob.size,
       type: "image/jpeg",
-      name: "dv-photo.jpg",
-    },
-    metrics: {
-      aspect: 1,
-      isSquareish: true,
-      backgroundLightnessAvg: bg.avg,
-      backgroundLightnessStdDev: bg.std,
+      bgAvg: bg.avg,
+      bgStd: bg.std,
       faceDetected: inputAnalysis.metrics.faceDetected,
-      faceCenterX,
-      faceCenterY,
+      cx: faceCenterX,
+      cy: faceCenterY,
       headRatio,
       topHeadroomRatio,
       headTopClippedRisk,
       tiltDeg,
-      blurRisk,
-    },
-    overlay: {
-      faceBox: {
-        x: faceMinX / DV_RULES.target.width,
-        y: faceMinY / DV_RULES.target.height,
-        w: (faceMaxX - faceMinX) / DV_RULES.target.width,
-        h: (faceMaxY - faceMinY) / DV_RULES.target.height,
-      },
-      leftEye: { x: leftEyeOut.x / DV_RULES.target.width, y: leftEyeOut.y / DV_RULES.target.height },
-      rightEye: { x: rightEyeOut.x / DV_RULES.target.width, y: rightEyeOut.y / DV_RULES.target.height },
-      chin: { x: chinOut.x / DV_RULES.target.width, y: chinOut.y / DV_RULES.target.height },
-      headTopY: headTopOut.y / DV_RULES.target.height,
-    },
-    checklist,
-    notes,
-  }
+    })
 
-  return { blob, analysis }
+    const notes = [
+      "Output is generated using safe transforms only: scale, reframe (eyes anchor), straighten (optional), and JPEG compression.",
+      encoded.exceeded ? "Could not reach target file size without heavy quality loss." : `JPEG quality used: ${encoded.quality.toFixed(2)}`,
+      ...inputAnalysis.notes,
+    ]
+
+    const analysis: DvAnalysis = {
+      input: {
+        width: DV_RULES.target.width,
+        height: DV_RULES.target.height,
+        bytes: blob.size,
+        type: "image/jpeg",
+        name: "dv-photo.jpg",
+      },
+      metrics: {
+        aspect: 1,
+        isSquareish: true,
+        backgroundLightnessAvg: bg.avg,
+        backgroundLightnessStdDev: bg.std,
+        faceDetected: inputAnalysis.metrics.faceDetected,
+        faceCenterX,
+        faceCenterY,
+        headRatio,
+        topHeadroomRatio,
+        headTopClippedRisk,
+        tiltDeg,
+        blurRisk,
+      },
+      overlay: {
+        faceBox: {
+          x: faceMinX / DV_RULES.target.width,
+          y: faceMinY / DV_RULES.target.height,
+          w: (faceMaxX - faceMinX) / DV_RULES.target.width,
+          h: (faceMaxY - faceMinY) / DV_RULES.target.height,
+        },
+        leftEye: { x: leftEyeOut.x / DV_RULES.target.width, y: leftEyeOut.y / DV_RULES.target.height },
+        rightEye: { x: rightEyeOut.x / DV_RULES.target.width, y: rightEyeOut.y / DV_RULES.target.height },
+        chin: { x: chinOut.x / DV_RULES.target.width, y: chinOut.y / DV_RULES.target.height },
+        headTopY: headTopOut.y / DV_RULES.target.height,
+      },
+      checklist,
+      notes,
+    }
+
+    return { blob, analysis }
+  } finally {
+    try {
+      bmp.close()
+    } catch {
+    }
+  }
 }
 
 self.onmessage = async (ev: MessageEvent<WorkerRequest>) => {

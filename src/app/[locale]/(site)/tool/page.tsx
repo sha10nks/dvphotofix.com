@@ -69,14 +69,14 @@ export default async function ToolPage({ params }: { params: Promise<{ locale: s
     <div className="bg-white">
       <JsonLd data={howToJsonLd} />
 
-      <div className="mx-auto grid max-w-[1300px] grid-cols-1 gap-10 px-6 py-10 lg:px-8 xl:grid-cols-[minmax(0,1fr)_220px]">
-        <div className="space-y-24">
+      <div className="mx-auto grid max-w-[1300px] grid-cols-1 gap-12 px-6 py-12 lg:px-8 xl:grid-cols-[minmax(0,1fr)_220px]">
+        <div className="space-y-28">
           <AdSlot variant="top" slot="top-banner" minHeight={90} />
 
           <section className="rounded-3xl border border-slate-200 bg-gradient-to-b from-blue-50 to-white p-8 sm:p-10">
             <div className="flex flex-col gap-6">
               <div className="space-y-4">
-                <h1 className="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
+                <h1 className="text-5xl font-semibold leading-relaxed tracking-tight text-slate-900 sm:text-6xl">
                   Fix your DV Lottery photo framing in minutes — right in your browser
                 </h1>
                 <p className="max-w-3xl text-lg leading-8 text-slate-800">

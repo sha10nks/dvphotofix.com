@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 
 import { blogPosts, getBlogPost } from "@/content/blog/posts"
 import { Link } from "@/i18n/navigation"
+import { AdSlot } from "@/components/AdSlot"
 import { JsonLd } from "@/components/JsonLd"
 import { MarkdownLite } from "@/components/MarkdownLite"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -48,6 +49,25 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const post = getBlogPost(slug)
   if (!post) notFound()
 
+  const lines = post.content.split("\n")
+  const mid = Math.floor(lines.length / 2)
+  let splitAt = mid
+  for (let i = 0; i < 120; i += 1) {
+    const a = mid - i
+    const b = mid + i
+    if (a > 10 && !lines[a].trim()) {
+      splitAt = a
+      break
+    }
+    if (b < lines.length - 10 && !lines[b].trim()) {
+      splitAt = b
+      break
+    }
+  }
+
+  const contentA = lines.slice(0, splitAt).join("\n")
+  const contentB = lines.slice(splitAt).join("\n")
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -77,6 +97,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     <div className="mx-auto max-w-[900px] px-6 py-10 lg:px-8">
       <JsonLd data={jsonLd} />
 
+      <AdSlot variant="top" slot={`blog-top-${post.slug}`} minHeight={90} className="mb-8" />
+
       <div className="mb-8">
         <Link href="/blog" className="text-sm font-medium text-blue-700 hover:text-blue-800">
           ← Back to blog
@@ -89,17 +111,24 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <div className="text-sm text-slate-600">{post.publishedISO}</div>
         </CardHeader>
         <CardContent>
-          <MarkdownLite content={post.content} />
+          <MarkdownLite content={contentA} />
 
-          <div className="mt-10 rounded-xl border border-slate-200 bg-white p-6">
-            <div className="text-base font-semibold text-slate-900">Use the tool</div>
-            <p className="mt-2 text-[15px] leading-7 text-slate-800">
+          <AdSlot variant="inline" slot={`blog-mid-${post.slug}`} minHeight={90} className="my-10" />
+
+          <MarkdownLite content={contentB} />
+
+          <div className="mt-10 rounded-2xl border border-slate-200 bg-gradient-to-b from-blue-50 to-white p-7">
+            <div className="text-lg font-semibold text-slate-900">Fix your DV photo now</div>
+            <p className="mt-2 text-[16px] leading-7 text-slate-800">
               Check and fix your DV photo using the tool. Safe formatting only: crop, center, straighten, resize, and
               compress.
             </p>
-            <div className="mt-3">
-              <Link href="/tool" className="font-medium text-blue-700 hover:text-blue-800">
-                Open the DV photo tool
+            <div className="mt-4">
+              <Link
+                href="/tool"
+                className="inline-flex h-12 items-center justify-center rounded-lg bg-blue-700 px-8 text-base font-semibold text-white shadow-sm hover:bg-blue-800"
+              >
+                Open the tool
               </Link>
             </div>
           </div>
@@ -120,6 +149,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           ) : null}
         </CardContent>
       </Card>
+
+      <AdSlot variant="footer" slot={`blog-bottom-${post.slug}`} minHeight={120} className="mt-10" />
     </div>
   )
 }

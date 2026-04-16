@@ -71,15 +71,15 @@ export function AdSlot({ variant, slot, className, minHeight }: AdSlotProps) {
       aria-label={tAds("label")}
       data-slot="ad-slot"
       className={cn(
-        "rounded-[12px] border border-[#e5e5e5] bg-[#f5f5f5] text-slate-800",
+        "rounded-[12px] border border-slate-200 bg-slate-100 text-slate-900",
         variant === "sidebar" ? "px-4 py-4" : "px-5 py-5",
         className
       )}
       style={{ minHeight: resolvedMinHeight }}
     >
       <div className="flex items-center justify-between">
-        <div className="text-[12px] font-medium tracking-wide text-slate-600">{tAds("label")}</div>
-        <div className="text-[12px] text-slate-500">{mounted ? slot : tAds("loading")}</div>
+        <div className="text-[12px] font-medium tracking-wide text-slate-700">{tAds("label")}</div>
+        <div className="text-[12px] text-slate-700">{mounted ? slot : tAds("loading")}</div>
       </div>
       <div className="mt-3 flex items-center justify-center rounded-[10px] border border-slate-200 bg-white" style={{ minHeight: Math.max(0, resolvedMinHeight - 48) }}>
         <div className="text-center text-[13px] text-slate-500">{mounted ? "Reserved ad space" : ""}</div>
