@@ -2,22 +2,12 @@
 
 import * as React from "react"
 import { useTranslations } from "next-intl"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
 
 import { recordEmailConsent } from "@/lib/gate/emailGate"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-
-const schema = z.object({
-  email: z.string().email(),
-  consent: z.literal(true),
-})
-
-type FormValues = z.infer<typeof schema>
 
 export function EmailGateModal({
   open,
@@ -32,25 +22,28 @@ export function EmailGateModal({
 }) {
   const t = useTranslations("gate")
   const [status, setStatus] = React.useState<"idle" | "loading" | "error">("idle")
+  const [email, setEmail] = React.useState("")
+  const formRef = React.useRef<HTMLFormElement | null>(null)
 
-  const form = useForm<FormValues>({
-    resolver: zodResolver(schema),
-    defaultValues: { email: "", consent: true },
-    mode: "onSubmit",
-  })
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    const el = formRef.current
+    if (el && !el.checkValidity()) {
+      el.reportValidity()
+      return
+    }
 
-  async function onSubmit(values: FormValues) {
     setStatus("loading")
     try {
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ ...values, locale, source: "gate" }),
+        body: JSON.stringify({ email, consent: true, locale, source: "gate" }),
       })
       if (!res.ok) throw new Error("Request failed")
       recordEmailConsent()
       setStatus("idle")
-      form.reset({ email: "", consent: true })
+      setEmail("")
       onOpenChange(false)
       onConsented()
     } catch {
@@ -66,13 +59,18 @@ export function EmailGateModal({
           <DialogDescription>{t("description")}</DialogDescription>
         </DialogHeader>
 
-        <form className="mt-4 space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+        <form ref={formRef} className="mt-4 space-y-4" onSubmit={onSubmit}>
           <div className="space-y-2">
             <Label htmlFor="gate-email">{t("emailLabel")}</Label>
-            <Input id="gate-email" inputMode="email" placeholder="name@example.com" {...form.register("email")} />
-            {form.formState.errors.email ? (
-              <p className="text-sm text-red-700">{String(form.formState.errors.email.message || "Invalid email")}</p>
-            ) : null}
+            <Input
+              id="gate-email"
+              inputMode="email"
+              type="email"
+              required
+              placeholder="name@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
 
           <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">

@@ -2,9 +2,6 @@
 
 import * as React from "react"
 import { useTranslations } from "next-intl"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
 
 import { recordEmailConsent } from "@/lib/gate/emailGate"
 import { useEmailGateState } from "@/lib/gate/useEmailGateState"
@@ -14,38 +11,36 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-const schema = z.object({
-  email: z.string().email(),
-  consent: z.boolean().optional(),
-})
-
-type FormValues = z.infer<typeof schema>
-
 export function EmailCaptureForm({ locale }: { locale: string }) {
   const gate = useEmailGateState()
   const t = useTranslations("email")
   const [status, setStatus] = React.useState<"idle" | "loading" | "success" | "error">("idle")
+  const [email, setEmail] = React.useState("")
+  const [consent, setConsent] = React.useState(false)
+  const formRef = React.useRef<HTMLFormElement | null>(null)
 
   if (gate.consented) return null
 
-  const form = useForm<FormValues>({
-    resolver: zodResolver(schema),
-    defaultValues: { email: "", consent: false },
-    mode: "onSubmit",
-  })
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    const el = formRef.current
+    if (el && !el.checkValidity()) {
+      el.reportValidity()
+      return
+    }
 
-  async function onSubmit(values: FormValues) {
     setStatus("loading")
     try {
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ ...values, locale }),
+        body: JSON.stringify({ email, consent, locale }),
       })
       if (!res.ok) throw new Error("Request failed")
       setStatus("success")
       recordEmailConsent()
-      form.reset({ email: "", consent: false })
+      setEmail("")
+      setConsent(false)
     } catch {
       setStatus("error")
     }
@@ -57,25 +52,25 @@ export function EmailCaptureForm({ locale }: { locale: string }) {
         <CardTitle>{t("title")}</CardTitle>
       </CardHeader>
       <CardContent>
-        <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+        <form ref={formRef} className="space-y-4" onSubmit={onSubmit}>
           <div className="space-y-2">
             <Label htmlFor="email">{t("emailLabel")}</Label>
             <Input
               id="email"
               inputMode="email"
+              type="email"
+              required
               placeholder="name@example.com"
-              {...form.register("email")}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            {form.formState.errors.email ? (
-              <p className="text-sm text-red-700">{String(form.formState.errors.email.message || "Invalid email")}</p>
-            ) : null}
           </div>
 
           <div className="flex items-start gap-2">
             <Checkbox
               id="consent"
-              checked={!!form.watch("consent")}
-              onCheckedChange={(checked) => form.setValue("consent", Boolean(checked))}
+              checked={consent}
+              onCheckedChange={(checked) => setConsent(Boolean(checked))}
             />
             <Label htmlFor="consent" className="text-sm text-slate-700">
               {t("consent")}

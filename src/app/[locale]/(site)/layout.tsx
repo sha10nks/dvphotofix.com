@@ -5,6 +5,9 @@ import { TrustBanner } from "@/components/TrustBanner"
 
 import { routing, type AppLocale } from "@/i18n/routing"
 
+export const dynamic = "force-static"
+export const revalidate = false
+
 export default async function SiteLayout({
   children,
   params,

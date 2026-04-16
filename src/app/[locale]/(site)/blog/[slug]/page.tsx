@@ -7,7 +7,11 @@ import { JsonLd } from "@/components/JsonLd"
 import { MarkdownLite } from "@/components/MarkdownLite"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-export async function generateStaticParams() {
+export const dynamic = "force-static"
+export const revalidate = false
+
+export async function generateStaticParams({ params }: { params: { locale: string } }) {
+  void params
   return blogPosts.map((p) => ({ slug: p.slug }))
 }
 

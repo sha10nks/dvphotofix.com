@@ -2,9 +2,6 @@
 
 import * as React from "react"
 import { X } from "lucide-react"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
 
 import { recordEmailConsent } from "@/lib/gate/emailGate"
@@ -14,17 +11,13 @@ import { Input } from "@/components/ui/input"
 
 const DISMISS_KEY = "dvpf:topbar:dismissed:v1"
 
-const schema = z.object({
-  email: z.string().email(),
-})
-
-type FormValues = z.infer<typeof schema>
-
 export function TopEmailCaptureBar({ locale }: { locale: string }) {
   const t = useTranslations("email")
   const gate = useEmailGateState()
   const [dismissed, setDismissed] = React.useState(false)
   const [status, setStatus] = React.useState<"idle" | "loading" | "error">("idle")
+  const [email, setEmail] = React.useState("")
+  const formRef = React.useRef<HTMLFormElement | null>(null)
 
   React.useEffect(() => {
     try {
@@ -34,25 +27,26 @@ export function TopEmailCaptureBar({ locale }: { locale: string }) {
     }
   }, [])
 
-  const form = useForm<FormValues>({
-    resolver: zodResolver(schema),
-    defaultValues: { email: "" },
-    mode: "onSubmit",
-  })
-
   if (gate.consented || dismissed) return null
 
-  async function onSubmit(values: FormValues) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    const el = formRef.current
+    if (el && !el.checkValidity()) {
+      el.reportValidity()
+      return
+    }
+
     setStatus("loading")
     try {
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ email: values.email, consent: true, locale, source: "topbar" }),
+        body: JSON.stringify({ email, consent: true, locale, source: "topbar" }),
       })
       if (!res.ok) throw new Error("Request failed")
       recordEmailConsent()
-      form.reset({ email: "" })
+      setEmail("")
       setStatus("idle")
     } catch {
       setStatus("error")
@@ -80,12 +74,16 @@ export function TopEmailCaptureBar({ locale }: { locale: string }) {
           </button>
         </div>
 
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex w-full flex-col gap-3 lg:w-auto lg:flex-row lg:items-center">
+        <form ref={formRef} onSubmit={onSubmit} className="flex w-full flex-col gap-3 lg:w-auto lg:flex-row lg:items-center">
           <div className="w-full lg:w-[360px]">
-            <Input inputMode="email" placeholder="name@example.com" {...form.register("email")} />
-            {form.formState.errors.email ? (
-              <div className="mt-1 text-[13px] text-red-700">Invalid email</div>
-            ) : null}
+            <Input
+              inputMode="email"
+              type="email"
+              required
+              placeholder="name@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
           <Button type="submit" disabled={status === "loading"}>
             {t("submit")}

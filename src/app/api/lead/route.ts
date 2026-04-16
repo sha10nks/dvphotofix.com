@@ -1,17 +1,15 @@
 import { NextResponse } from "next/server"
-import { z } from "zod"
 
-const schema = z.object({
-  email: z.string().email(),
-  consent: z.boolean().optional(),
-  locale: z.string().optional(),
-  source: z.string().optional(),
-})
+function isValidEmail(email: unknown) {
+  if (typeof email !== "string") return false
+  const trimmed = email.trim()
+  if (!trimmed) return false
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)
+}
 
 export async function POST(req: Request) {
   const json = await req.json().catch(() => null)
-  const parsed = schema.safeParse(json)
-  if (!parsed.success) {
+  if (!json || !isValidEmail((json as { email?: unknown }).email)) {
     return NextResponse.json({ ok: false, error: "invalid_request" }, { status: 400 })
   }
 

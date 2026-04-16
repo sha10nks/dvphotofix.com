@@ -5,6 +5,13 @@ import { routing, type AppLocale } from "@/i18n/routing"
 
 const rtlLocales: AppLocale[] = ["ar", "fa"]
 
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }))
+}
+
+export const dynamic = "force-static"
+export const revalidate = false
+
 export default async function LocaleLayout({
   children,
   params,
