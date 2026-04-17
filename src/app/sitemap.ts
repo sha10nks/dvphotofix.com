@@ -2,6 +2,9 @@ import type { MetadataRoute } from "next"
 
 import { blogPosts } from "@/content/blog/posts"
 
+export const dynamic = "force-static"
+export const revalidate = false
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://dvphotofix.netlify.app"
 

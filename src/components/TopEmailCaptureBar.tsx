@@ -39,12 +39,6 @@ export function TopEmailCaptureBar({ locale }: { locale: string }) {
 
     setStatus("loading")
     try {
-      const res = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ email, consent: true, locale, source: "topbar" }),
-      })
-      if (!res.ok) throw new Error("Request failed")
       recordEmailConsent()
       setEmail("")
       setStatus("idle")

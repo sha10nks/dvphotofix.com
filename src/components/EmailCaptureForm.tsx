@@ -31,12 +31,6 @@ export function EmailCaptureForm({ locale }: { locale: string }) {
 
     setStatus("loading")
     try {
-      const res = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ email, consent, locale }),
-      })
-      if (!res.ok) throw new Error("Request failed")
       setStatus("success")
       recordEmailConsent()
       setEmail("")

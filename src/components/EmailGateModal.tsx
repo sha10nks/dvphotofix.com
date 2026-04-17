@@ -35,12 +35,6 @@ export function EmailGateModal({
 
     setStatus("loading")
     try {
-      const res = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ email, consent: true, locale, source: "gate" }),
-      })
-      if (!res.ok) throw new Error("Request failed")
       recordEmailConsent()
       setStatus("idle")
       setEmail("")
