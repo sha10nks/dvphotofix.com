@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: "Disclaimer",
   description: "Non-affiliation and limitations of dvphotofix.netlify.app.",
   alternates: {
-    canonical: "https://dvphotofix.netlify.app/disclaimer",
+    canonical: "https://dvphotofix.netlify.app/en/disclaimer/",
   },
   openGraph: {
     title: "Disclaimer",
     description: "Non-affiliation and limitations of dvphotofix.netlify.app.",
-    url: "https://dvphotofix.netlify.app/disclaimer",
+    url: "https://dvphotofix.netlify.app/en/disclaimer/",
   },
   twitter: {
     card: "summary_large_image",

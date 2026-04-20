@@ -18,13 +18,13 @@ export const metadata: Metadata = {
   description:
     "Prepare a DV Lottery photo locally in your browser. Safe transforms only: crop, center, straighten, resize, compress. Not affiliated with the U.S. government.",
   alternates: {
-    canonical: "https://dvphotofix.netlify.app/tool",
+    canonical: "https://dvphotofix.netlify.app/en/tool/",
   },
   openGraph: {
     title: "DV Photo Tool — Crop, Center, Resize, Compress (600×600 JPEG)",
     description:
       "Prepare a DV Lottery photo locally in your browser. Safe transforms only: crop, center, straighten, resize, compress. Not affiliated with the U.S. government.",
-    url: "https://dvphotofix.netlify.app/tool",
+    url: "https://dvphotofix.netlify.app/en/tool/",
   },
   twitter: {
     card: "summary_large_image",

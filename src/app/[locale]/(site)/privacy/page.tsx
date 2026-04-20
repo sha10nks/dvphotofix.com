@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "Privacy policy for dvphotofix.netlify.app.",
   alternates: {
-    canonical: "https://dvphotofix.netlify.app/privacy",
+    canonical: "https://dvphotofix.netlify.app/en/privacy/",
   },
   openGraph: {
     title: "Privacy Policy",
     description: "Privacy policy for dvphotofix.netlify.app.",
-    url: "https://dvphotofix.netlify.app/privacy",
+    url: "https://dvphotofix.netlify.app/en/privacy/",
   },
   twitter: {
     card: "summary_large_image",
