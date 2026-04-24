@@ -391,6 +391,21 @@ const FILLER_SLUGS = [
   "dv-photo-hair-clipped",
   "dv-photo-chin-cut-off",
   "dv-photo-what-if-face-detection-fails",
+  "dv-photo-selfie-allowed",
+  "dv-photo-passport-style",
+  "dv-photo-white-background",
+  "dv-photo-baby-child-requirements",
+  "dv-photo-print-scan-allowed",
+  "dv-photo-red-eye",
+  "dv-photo-glare-face",
+  "dv-photo-hat-rule",
+  "dv-photo-headphones-earbuds",
+  "dv-photo-sunglasses",
+  "dv-photo-portrait-mode",
+  "dv-photo-camera-distance",
+  "dv-photo-color-balance",
+  "dv-photo-face-shadow-fix",
+  "dv-photo-ears-visible",
 ]
 
 function makeGenericTopic(slug: string): Topic {
@@ -432,7 +447,7 @@ const ALL_TOPICS: Topic[] = (() => {
   for (const slug of FILLER_SLUGS) {
     if (!map.has(slug)) map.set(slug, makeGenericTopic(slug))
   }
-  return Array.from(map.values()).slice(0, 70)
+  return Array.from(map.values()).slice(0, 85)
 })()
 
 export const blogPosts: BlogPost[] = (() => {

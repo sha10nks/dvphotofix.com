@@ -125,7 +125,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </p>
             <div className="mt-4">
               <Link
-                href="/tool"
+                href="/tool/"
                 className="inline-flex h-12 items-center justify-center rounded-lg bg-blue-700 px-8 text-base font-semibold text-white shadow-sm hover:bg-blue-800"
               >
                 Open the tool

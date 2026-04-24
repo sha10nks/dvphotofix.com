@@ -61,7 +61,7 @@ export default function UpdatesPage() {
                 <a className="font-medium text-blue-700 hover:text-blue-800" href={DV_SOURCES.travelDv} target="_blank" rel="noreferrer">
                   DV Program source pages
                 </a>
-                <Link className="font-medium text-blue-700 hover:text-blue-800" href="/tool">
+                <Link className="font-medium text-blue-700 hover:text-blue-800" href="/tool/">
                   Photo tool
                 </Link>
                 <Link className="font-medium text-blue-700 hover:text-blue-800" href="/photo-requirements">

@@ -119,7 +119,7 @@ export default function PhotoRequirementsPage() {
                 <li>If you are too close: scale down while keeping margins and shoulders.</li>
               </ul>
               <p className="mt-3">
-                <Link href="/tool" className="font-medium text-blue-700 hover:text-blue-800">
+                <Link href="/tool/" className="font-medium text-blue-700 hover:text-blue-800">
                   Use the photo tool to reframe safely
                 </Link>
                 .
@@ -183,7 +183,7 @@ export default function PhotoRequirementsPage() {
               </li>
             </ul>
             <p className="mt-3">
-              Ready to check yours? <Link href="/tool" className="font-medium text-blue-700 hover:text-blue-800">Open the tool</Link>.
+              Ready to check yours? <Link href="/tool/" className="font-medium text-blue-700 hover:text-blue-800">Open the tool</Link>.
             </p>
           </CardContent>
         </Card>
@@ -195,7 +195,7 @@ export default function PhotoRequirementsPage() {
           <CardContent className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-[15px] leading-7 text-slate-800">Run checks and safe reframing locally in your browser.</p>
             <Button asChild>
-              <Link href="/tool">Open the photo tool</Link>
+              <Link href="/tool/">Open the photo tool</Link>
             </Button>
           </CardContent>
         </Card>

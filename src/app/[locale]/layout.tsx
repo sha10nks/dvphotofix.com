@@ -1,4 +1,5 @@
 import { NextIntlClientProvider } from "next-intl"
+import type { Metadata } from "next"
 
 import { routing, type AppLocale } from "@/i18n/routing"
 
@@ -10,6 +11,24 @@ export function generateStaticParams() {
 
 export const dynamic = "force-static"
 export const revalidate = false
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params
+  const locale = (routing.locales.includes(rawLocale as never) ? rawLocale : routing.defaultLocale) as AppLocale
+  if (locale !== "en") {
+    return {
+      robots: {
+        index: false,
+        follow: true,
+      },
+    }
+  }
+  return {}
+}
 
 export default async function LocaleLayout({
   children,

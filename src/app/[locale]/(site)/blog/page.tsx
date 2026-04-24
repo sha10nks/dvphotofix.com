@@ -34,7 +34,7 @@ export default function BlogIndexPage() {
           format your DV photo safely.
         </p>
         <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-          <Link href="/tool" className="inline-flex h-12 items-center justify-center rounded-lg bg-blue-700 px-8 text-base font-medium text-white shadow-sm hover:bg-blue-800">
+          <Link href="/tool/" className="inline-flex h-12 items-center justify-center rounded-lg bg-blue-700 px-8 text-base font-medium text-white shadow-sm hover:bg-blue-800">
             Open the tool
           </Link>
           <Link href="/photo-requirements" className="inline-flex h-12 items-center justify-center rounded-lg border border-slate-200 bg-white px-8 text-base font-medium text-slate-900 hover:bg-slate-50">

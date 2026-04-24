@@ -108,7 +108,7 @@ export default function ContactPage({ searchParams }: { searchParams?: { success
             </div>
 
             <div className="text-sm text-slate-700">
-              Helpful links: <Link className="font-medium text-blue-700 hover:text-blue-800" href="/tool">Tool</Link> ·
+              Helpful links: <Link className="font-medium text-blue-700 hover:text-blue-800" href="/tool/">Tool</Link> ·
               <Link className="font-medium text-blue-700 hover:text-blue-800" href="/photo-requirements">Photo requirements</Link>
             </div>
           </CardContent>

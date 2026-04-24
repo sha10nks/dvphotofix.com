@@ -19,7 +19,7 @@ export function SiteHeader() {
         </Link>
 
         <nav className="hidden items-center gap-4 md:flex">
-          <Link href="/tool" className="text-sm text-blue-50 hover:text-white">
+          <Link href="/tool/" className="text-sm text-blue-50 hover:text-white">
             {tNav("tool")}
           </Link>
           <Link href="/photo-requirements" className="text-sm text-blue-50 hover:text-white">
@@ -39,7 +39,7 @@ export function SiteHeader() {
         <div className="ml-auto hidden items-center gap-3 md:flex">
           <LanguageSwitcher />
           <Button asChild variant="secondary" size="sm">
-            <Link href="/tool" className="gap-2">
+            <Link href="/tool/" className="gap-2">
               <ShieldCheck className="h-4 w-4" />
               {tNav("tool")}
             </Link>
@@ -49,7 +49,7 @@ export function SiteHeader() {
         <div className="ml-auto flex items-center gap-2 md:hidden">
           <LanguageSwitcher />
           <Button asChild variant="secondary" size="icon" aria-label={tNav("tool")}>
-            <Link href="/tool">
+            <Link href="/tool/">
               <ShieldCheck className="h-4 w-4" />
             </Link>
           </Button>
