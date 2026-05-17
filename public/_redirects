@@ -1,14 +1,11 @@
-/en/* /:splat 301!
-/tool /tool/ 301!
-/blog /blog/ 301!
-/blog/:slug /blog/:slug/ 301!
-/photo-requirements /photo-requirements/ 301!
-/faq /faq/ 301!
-/updates /updates/ 301!
-/contact /contact/ 301!
-/about /about/ 301!
-/privacy /privacy/ 301!
-/terms /terms/ 301!
-/disclaimer /disclaimer/ 301!
-/editorial /editorial/ 301!
+/tool /en/tool/ 301!
+/tool/ /en/tool/ 301!
+/blog /en/blog/ 301!
+/blog/ /en/blog/ 301!
+/blog/:slug /en/blog/:slug/ 301!
+/blog/:slug/ /en/blog/:slug/ 301!
+
+/:locale/tool /:locale/tool/ 200
+/:locale/blog /:locale/blog/ 200
+/:locale/blog/:slug /:locale/blog/:slug/ 200
 /* /404.html 404
