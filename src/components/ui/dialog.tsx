@@ -25,8 +25,8 @@ DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
 
 export const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & { closeLabel: string }
+>(({ className, children, closeLabel, ...props }, ref) => (
   <DialogPortal>
     <DialogOverlay />
     <DialogPrimitive.Content
@@ -40,7 +40,7 @@ export const DialogContent = React.forwardRef<
       {children}
       <DialogClose
         className="absolute right-4 top-4 rounded-md p-1 text-slate-500 hover:bg-slate-100 hover:text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
-        aria-label="Close"
+        aria-label={closeLabel}
       >
         <X className="h-4 w-4" />
       </DialogClose>
@@ -72,4 +72,3 @@ export const DialogDescription = React.forwardRef<
   <DialogPrimitive.Description ref={ref} className={cn("text-sm text-slate-700", className)} {...props} />
 ))
 DialogDescription.displayName = DialogPrimitive.Description.displayName
-

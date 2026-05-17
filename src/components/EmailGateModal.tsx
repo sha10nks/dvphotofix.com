@@ -1,9 +1,9 @@
 "use client"
 
 import * as React from "react"
-import { useTranslations } from "next-intl"
 
 import { recordEmailConsent } from "@/lib/gate/emailGate"
+import { useTranslations } from "@/i18n/I18nClientProvider"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -12,15 +12,15 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 export function EmailGateModal({
   open,
   onOpenChange,
-  locale,
   onConsented,
 }: {
   open: boolean
   onOpenChange: (v: boolean) => void
-  locale: string
   onConsented: () => void
 }) {
-  const t = useTranslations("gate")
+  const tTool = useTranslations("tool")
+  const tCommon = useTranslations("common")
+  const tErrors = useTranslations("errors")
   const [status, setStatus] = React.useState<"idle" | "loading" | "error">("idle")
   const [email, setEmail] = React.useState("")
   const formRef = React.useRef<HTMLFormElement | null>(null)
@@ -47,21 +47,21 @@ export function EmailGateModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent closeLabel={tCommon("actions.close")}>
         <DialogHeader>
-          <DialogTitle>{t("title")}</DialogTitle>
-          <DialogDescription>{t("description")}</DialogDescription>
+          <DialogTitle>{tTool("gate.title")}</DialogTitle>
+          <DialogDescription>{tTool("gate.description")}</DialogDescription>
         </DialogHeader>
 
         <form ref={formRef} className="mt-4 space-y-4" onSubmit={onSubmit}>
           <div className="space-y-2">
-            <Label htmlFor="gate-email">{t("emailLabel")}</Label>
+            <Label htmlFor="gate-email">{tTool("email.emailLabel")}</Label>
             <Input
               id="gate-email"
               inputMode="email"
               type="email"
               required
-              placeholder="name@example.com"
+              placeholder={tTool("email.placeholder")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="h-12 border-slate-300"
@@ -69,19 +69,19 @@ export function EmailGateModal({
           </div>
 
           <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
-            {t("privacyNote")}
+            {tTool("gate.notice")}
           </div>
 
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-              {t("notNow")}
+              {tCommon("actions.notNow")}
             </Button>
             <Button type="submit" disabled={status === "loading"}>
-              {t("submit")}
+              {tCommon("actions.continue")}
             </Button>
           </DialogFooter>
 
-          {status === "error" ? <p className="text-sm text-red-700">{t("error")}</p> : null}
+          {status === "error" ? <p className="text-sm text-red-700">{tErrors("generic.tryAgain")}</p> : null}
         </form>
       </DialogContent>
     </Dialog>

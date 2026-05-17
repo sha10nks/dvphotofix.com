@@ -1,32 +1,33 @@
-import { useTranslations } from "next-intl"
+"use client"
 
 import { DV_SOURCES } from "@/lib/site"
+import { useTranslations } from "@/i18n/I18nClientProvider"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 
 export function DisclaimerBlock() {
-  const t = useTranslations("disclaimer")
+  const tCommon = useTranslations("common")
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{t("blockTitle")}</CardTitle>
+        <CardTitle>{tCommon("disclaimer.title")}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <ul className="list-disc space-y-3 pl-5 text-base leading-7 text-slate-800">
-          <li>{t("bullets.notOfficial")}</li>
-          <li>{t("bullets.noApply")}</li>
-          <li>{t("bullets.noGuarantee")}</li>
-          <li>{t("bullets.notReplace")}</li>
-          <li>{t("bullets.verify")}</li>
+          <li>{tCommon("disclaimer.item1")}</li>
+          <li>{tCommon("disclaimer.item2")}</li>
+          <li>{tCommon("disclaimer.item3")}</li>
+          <li>{tCommon("disclaimer.item4")}</li>
+          <li>{tCommon("disclaimer.item5")}</li>
         </ul>
         <Separator />
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-base text-slate-800">Use the U.S. Department of State DV Program pages as your source of truth.</p>
+          <p className="text-base text-slate-800">{tCommon("disclaimer.note")}</p>
           <Button asChild variant="outline">
             <a href={DV_SOURCES.travelDv} target="_blank" rel="noreferrer">
-              {t("sourceLink")}
+              {tCommon("disclaimer.openSources")}
             </a>
           </Button>
         </div>

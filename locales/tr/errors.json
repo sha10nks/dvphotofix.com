@@ -1,0 +1,7 @@
+{
+  "generic": {
+    "tryAgain": "Lütfen tekrar deneyin.",
+    "required": "Bu alan zorunludur.",
+    "invalidEmail": "Geçerli bir e-posta adresi girin."
+  }
+}

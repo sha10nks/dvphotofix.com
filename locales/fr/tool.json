@@ -1,0 +1,49 @@
+{
+  "hero": {
+    "title": "Corrigez le cadrage de votre photo DV en quelques minutes — directement dans votre navigateur",
+    "subtitle": "Formatage sûr uniquement : recadrer, centrer, redresser, redimensionner en 600×600 et compresser sous 239 kB. Sans embellissement. Sans changement d’arrière‑plan.",
+    "primaryCta": "Commencer par l’envoi",
+    "secondaryCta": "Ouvrir les pages officielles du programme DV",
+    "note": "Ce site n’est pas officiel, n’est pas affilié au gouvernement des États‑Unis et ne soumet pas de candidatures. L’acceptation finale dépend du processus officiel."
+  },
+  "tool": {
+    "title": "Outil photo DV",
+    "uploadTitle": "Importer des photos",
+    "uploadHelp": "Importez 1 à 10 photos. Le traitement démarre automatiquement. Chaque photo est formatée localement avec des ajustements sûrs.",
+    "downloadZip": "Télécharger le ZIP",
+    "clearAll": "Tout effacer",
+    "readyCount": "{ready}/{total} prêtes",
+    "emptyState": "Importez des photos pour commencer."
+  },
+  "email": {
+    "title": "Recevoir des nouveautés DV (facultatif)",
+    "emailLabel": "E-mail",
+    "placeholder": "name@example.com",
+    "consent": "Oui, vous pouvez m’envoyer des conseils pour la photo DV et des mises à jour de l’outil. Je peux me désinscrire à tout moment.",
+    "note": "Zéro spam. Confidentialité d’abord. Votre e-mail reste privé.",
+    "submit": "S’abonner",
+    "success": "Merci ! Vous êtes abonné(e)."
+  },
+  "gate": {
+    "title": "Entrez votre e-mail pour télécharger",
+    "description": "On l’utilise pour vous envoyer des conseils photo DV et des mises à jour de l’outil. Désinscription à tout moment.",
+    "notice": "Nous n’envoyons pas vos photos pour l’outil principal. Cet e-mail sert uniquement aux nouveautés."
+  },
+  "status": {
+    "queued": "En attente",
+    "uploading": "Envoi…",
+    "analyzing": "Analyse…",
+    "issuesDetected": "Problèmes détectés",
+    "checksCompleted": "Vérifications terminées",
+    "fixing": "Traitement…",
+    "finalizing": "Finalisation…",
+    "ready": "Terminé",
+    "error": "Erreur"
+  },
+  "progress": {
+    "processing": "Traitement des images…"
+  },
+  "errors": {
+    "fixFailed": "Échec du traitement"
+  }
+}

@@ -9,6 +9,7 @@ import type { ChecklistItem, DvAnalysis, DvFixOptions } from "@/lib/dvPhotoRules
 import { detectFace } from "@/lib/vision/detectFace"
 import { fixInWorker } from "@/lib/workers/dvWorkerClient"
 import { getEmailGateState, recordSuccessfulDownload } from "@/lib/gate/emailGate"
+import { useTranslations } from "@/i18n/I18nClientProvider"
 import { EmailGateModal } from "@/components/EmailGateModal"
 import { Button } from "@/components/ui/button"
 
@@ -86,14 +87,22 @@ function useSuccessSound() {
   return { unlock, play }
 }
 
-function StatusBadge({ phase, issues }: { phase: Phase; issues: Item["issues"] }) {
+function StatusBadge({
+  tTool,
+  phase,
+  issues,
+}: {
+  tTool: (key: string) => string
+  phase: Phase
+  issues: Item["issues"]
+}) {
   const base = "inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[13px] font-medium"
 
   if (phase === "uploading") {
     return (
       <div className={`${base} border-slate-200 bg-white text-slate-700`}>
         <Loader2 className="h-4 w-4 animate-spin" />
-        Uploading
+        {tTool("status.uploading")}
       </div>
     )
   }
@@ -105,15 +114,15 @@ function StatusBadge({ phase, issues }: { phase: Phase; issues: Item["issues"] }
           animate={{ opacity: [0.3, 1, 0.3] }}
           transition={{ duration: 1.2, repeat: Infinity }}
         />
-        Analyzing
+        {tTool("status.analyzing")}
       </div>
     )
   }
   if (phase === "issues") {
     if (issues === "some") {
-      return <div className={`${base} border-red-200 bg-red-50 text-red-900`}>Issues detected</div>
+      return <div className={`${base} border-red-200 bg-red-50 text-red-900`}>{tTool("status.issuesDetected")}</div>
     }
-    return <div className={`${base} border-emerald-200 bg-emerald-50 text-emerald-900`}>Checks completed</div>
+    return <div className={`${base} border-emerald-200 bg-emerald-50 text-emerald-900`}>{tTool("status.checksCompleted")}</div>
   }
   if (phase === "fixing") {
     return (
@@ -123,7 +132,7 @@ function StatusBadge({ phase, issues }: { phase: Phase; issues: Item["issues"] }
           animate={{ scale: [1, 1.25, 1] }}
           transition={{ duration: 1.1, repeat: Infinity }}
         />
-        Fixing
+        {tTool("status.fixing")}
       </div>
     )
   }
@@ -135,25 +144,25 @@ function StatusBadge({ phase, issues }: { phase: Phase; issues: Item["issues"] }
           animate={{ opacity: [0.4, 1, 0.4] }}
           transition={{ duration: 1.2, repeat: Infinity }}
         />
-        Finalizing
+        {tTool("status.finalizing")}
       </div>
     )
   }
   if (phase === "ready") {
-    return <div className="text-lg font-semibold text-emerald-700">Ready</div>
+    return <div className="text-lg font-semibold text-emerald-700">{tTool("status.ready")}</div>
   }
   if (phase === "error") {
-    return <div className={`${base} border-red-200 bg-red-50 text-red-900`}>Error</div>
+    return <div className={`${base} border-red-200 bg-red-50 text-red-900`}>{tTool("status.error")}</div>
   }
   return (
     <div className={`${base} border-slate-200 bg-white text-slate-700`}>
       <Upload className="h-4 w-4" />
-      Queued
+      {tTool("status.queued")}
     </div>
   )
 }
 
-function ProgressCircle({ progress }: { progress: number }) {
+function ProgressCircle({ progress, label }: { progress: number; label: string }) {
   const r = 40
   const c = 2 * Math.PI * r
   const dash = c
@@ -179,7 +188,7 @@ function ProgressCircle({ progress }: { progress: number }) {
           {progress}%
         </div>
       </div>
-      <p className="mt-2 text-sm text-slate-700">Processing images…</p>
+      <p className="mt-2 text-sm text-slate-700">{label}</p>
     </div>
   )
 }
@@ -228,7 +237,8 @@ function downloadBlob(blob: Blob, filename: string) {
   setTimeout(() => URL.revokeObjectURL(url), 30_000)
 }
 
-export function UnifiedDvPhotoTool({ locale }: { locale: string }) {
+export function UnifiedDvPhotoTool() {
+  const tTool = useTranslations("tool")
   const { unlock, play } = useSuccessSound()
   const [items, setItems] = React.useState<Item[]>([])
   const [gateOpen, setGateOpen] = React.useState(false)
@@ -350,7 +360,7 @@ export function UnifiedDvPhotoTool({ locale }: { locale: string }) {
       setItem(id, { phase: "ready", progress: 100 })
       play()
     } catch (e) {
-      setItem(id, { phase: "error", error: e instanceof Error ? e.message : "Fix failed" })
+      setItem(id, { phase: "error", error: e instanceof Error ? e.message : tTool("errors.fixFailed") })
     }
   }
 
@@ -431,30 +441,27 @@ export function UnifiedDvPhotoTool({ locale }: { locale: string }) {
 
   return (
     <div className="space-y-10">
-      <EmailGateModal open={gateOpen} onOpenChange={setGateOpen} locale={locale} onConsented={handleConsented} />
+      <EmailGateModal open={gateOpen} onOpenChange={setGateOpen} onConsented={handleConsented} />
 
       <div className="space-y-4">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div className="space-y-1">
-            <h2 className="text-[22px] font-semibold leading-relaxed text-slate-900">Upload photos</h2>
-            <p className="max-w-2xl text-[15px] leading-7 text-slate-700">
-              Upload 1–10 photos. Processing starts automatically. Each photo is formatted locally using safe transforms
-              only.
-            </p>
+            <h2 className="text-[22px] font-semibold leading-relaxed text-slate-900">{tTool("tool.uploadTitle")}</h2>
+            <p className="max-w-2xl text-[15px] leading-7 text-slate-700">{tTool("tool.uploadHelp")}</p>
           </div>
           <div className="flex items-center gap-3">
             <input
               type="file"
               accept="image/*"
               multiple
-              className="block w-full max-w-[360px] text-base text-slate-800 file:mr-4 file:rounded-lg file:border-0 file:bg-blue-700 file:px-5 file:py-3 file:text-base file:font-semibold file:text-white hover:file:bg-blue-800"
+              className="block w-full max-w-[420px] rounded-[16px] border-2 border-dashed border-[#94A3B8] bg-[#F8FAFC] p-3 text-[15px] text-[#334155] file:mr-4 file:rounded-[14px] file:border-0 file:bg-[#2563EB] file:px-5 file:py-3 file:text-[15px] file:font-semibold file:text-white hover:border-[#2563EB] hover:bg-[#EFF6FF] hover:file:bg-[#1D4ED8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
               onChange={(e) => onFiles(e.target.files)}
             />
           </div>
         </div>
       </div>
 
-      {showGlobalProgress ? <ProgressCircle progress={globalProgress} /> : null}
+      {showGlobalProgress ? <ProgressCircle progress={globalProgress} label={tTool("progress.processing")} /> : null}
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <AnimatePresence initial={false}>
@@ -471,8 +478,8 @@ export function UnifiedDvPhotoTool({ locale }: { locale: string }) {
                 exit={{ opacity: 0, y: 8 }}
                 className="space-y-3"
               >
-                <div className="rounded-[12px] border border-slate-200 bg-slate-100 p-4">
-                  <div className="relative aspect-square overflow-hidden rounded-[10px] bg-white">
+                <div className="rounded-[16px] border border-[#D7E0EA] bg-[#EEF2F7] p-4 shadow-[0_4px_14px_rgba(15,23,42,0.04)]">
+                  <div className="relative aspect-square overflow-hidden rounded-[14px] bg-white">
                     <img src={shown} alt={item.fileName} className="absolute inset-0 h-full w-full object-contain" />
                     <OverlayGuides overlay={item.analysis?.overlay} />
                   </div>
@@ -501,7 +508,7 @@ export function UnifiedDvPhotoTool({ locale }: { locale: string }) {
                       transition={{ duration: 0.18 }}
                       className="shrink-0"
                     >
-                      <StatusBadge phase={item.phase} issues={item.issues} />
+                      <StatusBadge tTool={tTool} phase={item.phase} issues={item.issues} />
                     </motion.div>
                   </AnimatePresence>
                 </div>
@@ -515,20 +522,20 @@ export function UnifiedDvPhotoTool({ locale }: { locale: string }) {
         <div className="text-[15px] text-slate-700">
           {items.length ? (
             <span>
-              {readyCount}/{items.length} ready
+              {tTool("tool.readyCount", { ready: readyCount, total: items.length })}
             </span>
           ) : (
-            <span>Upload photos to begin.</span>
+            <span>{tTool("tool.emptyState")}</span>
           )}
         </div>
         <div className="flex flex-col gap-3 sm:flex-row">
           <Button type="button" size="lg" disabled={!allReady()} onClick={() => void runZipDownload()}>
             <Download className="h-4 w-4" />
-            Download ZIP
+            {tTool("tool.downloadZip")}
           </Button>
           <Button type="button" size="lg" variant="outline" disabled={!items.length} onClick={clearAll}>
             <Trash2 className="h-4 w-4" />
-            Clear all
+            {tTool("tool.clearAll")}
           </Button>
         </div>
       </div>

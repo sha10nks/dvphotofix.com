@@ -1,0 +1,49 @@
+{
+  "hero": {
+    "title": "DV fotoğraf kadrajını dakikalar içinde düzelt — tarayıcında",
+    "subtitle": "Yalnızca güvenli biçimlendirme: kırp, ortala, düzelt, 600×600'e boyutlandır ve 239 kB altına sıkıştır. Güzelleştirme yok. Arka plan değiştirme yok.",
+    "primaryCta": "Yüklemeyle başla",
+    "secondaryCta": "Resmi DV Program sayfalarını aç",
+    "note": "Bu site resmi değildir, ABD hükümeti ile bağlantılı değildir ve başvuru göndermez. Nihai kabul resmi inceleme sürecine bağlıdır."
+  },
+  "tool": {
+    "title": "DV foto aracı",
+    "uploadTitle": "Fotoğrafları yükle",
+    "uploadHelp": "1–10 fotoğraf yükle. İşleme otomatik başlar. Her fotoğraf tarayıcında güvenli işlemlerle biçimlendirilir.",
+    "downloadZip": "ZIP indir",
+    "clearAll": "Hepsini temizle",
+    "readyCount": "{ready}/{total} hazır",
+    "emptyState": "Başlamak için fotoğraf yükleyin."
+  },
+  "email": {
+    "title": "DV güncellemelerini al (isteğe bağlı)",
+    "emailLabel": "E-posta",
+    "placeholder": "name@example.com",
+    "consent": "Evet, bana DV fotoğraf ipuçları ve araç güncellemeleri e-posta ile gönderilebilir. İstediğim zaman abonelikten çıkabilirim.",
+    "note": "Spam yok. Önce gizlilik. E-postanız gizli kalır.",
+    "submit": "Abone ol",
+    "success": "Teşekkürler! Aboneliğiniz alındı."
+  },
+  "gate": {
+    "title": "İndirmek için e-postanı gir",
+    "description": "DV foto ipuçları ve araç güncellemeleri göndermek için kullanırız. İstediğin zaman çıkabilirsin.",
+    "notice": "Ana araç için fotoğraflarını yüklemiyoruz. Bu e-posta sadece güncellemeler içindir."
+  },
+  "status": {
+    "queued": "Sırada",
+    "uploading": "Yükleniyor…",
+    "analyzing": "Analiz ediliyor…",
+    "issuesDetected": "Sorun tespit edildi",
+    "checksCompleted": "Kontroller tamamlandı",
+    "fixing": "İşleniyor…",
+    "finalizing": "Tamamlanıyor…",
+    "ready": "Hazır",
+    "error": "Hata"
+  },
+  "progress": {
+    "processing": "Görseller işleniyor…"
+  },
+  "errors": {
+    "fixFailed": "İşlem başarısız"
+  }
+}

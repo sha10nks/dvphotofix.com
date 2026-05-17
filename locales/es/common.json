@@ -1,0 +1,56 @@
+{
+  "nav": {
+    "brand": "DV Photo Fix",
+    "tool": "Herramienta",
+    "requirements": "Requisitos",
+    "faq": "FAQ",
+    "updates": "Actualizaciones",
+    "blog": "Blog"
+  },
+  "footer": {
+    "tagline": "Herramienta de foto DV con privacidad primero.",
+    "pages": "Páginas",
+    "resources": "Recursos",
+    "about": "Acerca de",
+    "privacy": "Política de privacidad",
+    "terms": "Términos",
+    "disclaimer": "Aviso legal",
+    "contact": "Contacto",
+    "editorial": "Editorial y fuentes"
+  },
+  "language": {
+    "label": "Idioma",
+    "ariaLabel": "Seleccionar idioma"
+  },
+  "actions": {
+    "openTool": "Abrir la herramienta",
+    "subscribe": "Suscribirse",
+    "dismiss": "Ocultar",
+    "close": "Cerrar",
+    "notNow": "Ahora no",
+    "continue": "Continuar"
+  },
+  "ads": {
+    "label": "Publicidad",
+    "loading": "Cargando…",
+    "reserved": "Espacio publicitario reservado"
+  },
+  "trust": {
+    "message": "Sitio independiente. No afiliado al gobierno de EE. UU. Verifica siempre los requisitos en las páginas oficiales del programa DV.",
+    "close": "Cerrar"
+  },
+  "topbar": {
+    "title": "Recibe consejos y actualizaciones de fotos DV",
+    "placeholder": "name@example.com"
+  },
+  "disclaimer": {
+    "title": "Aviso importante",
+    "item1": "Este sitio es independiente y no está afiliado al gobierno de EE. UU.",
+    "item2": "Este sitio no envía solicitudes de DV por ti.",
+    "item3": "Ninguna herramienta puede garantizar la aceptación.",
+    "item4": "Esta información no sustituye las instrucciones oficiales.",
+    "item5": "Verifica siempre las reglas actuales en las páginas oficiales del programa DV.",
+    "note": "Usa las páginas del programa DV del Departamento de Estado de EE. UU. como referencia principal.",
+    "openSources": "Abrir páginas oficiales del programa DV"
+  }
+}

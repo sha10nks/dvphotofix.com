@@ -1,0 +1,22 @@
+{
+  "page": {
+    "title": "SSS",
+    "intro": "Resmi DV Program rehberiyle uyumlu hızlı yanıtlar. Bu site bağımsızdır ve ABD hükümeti ile bağlantılı değildir."
+  },
+  "toolQuick": {
+    "title": "Hızlı SSS",
+    "intro": "Sık sorulan sorulara kısa cevaplar. Resmi kaynak için DV Program sayfalarına bakın.",
+    "q1": {
+      "question": "Bu resmi bir site mi?",
+      "answer": "Hayır. DV Photo Fix bağımsızdır ve ABD hükümeti ile bağlantılı değildir."
+    },
+    "q2": {
+      "question": "Bu araç kabulü garanti eder mi?",
+      "answer": "Hayır. Biçim ve kadraj konusunda yardımcı olur ama karar resmi inceleme sürecine aittir."
+    },
+    "q3": {
+      "question": "Araç yüzümü düzenler mi ya da fotoğrafı “güzelleştirir” mi?",
+      "answer": "Hayır. Sadece güvenli geometrik işlemler uygular: kırp, ortala, düzelt, yeniden boyutlandır ve sıkıştır. Yüz rötuşu yok."
+    }
+  }
+}

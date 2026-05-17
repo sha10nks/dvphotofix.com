@@ -1,0 +1,22 @@
+{
+  "page": {
+    "title": "Preguntas frecuentes",
+    "intro": "Respuestas rápidas alineadas con la guía del programa DV. Este sitio es independiente y no está afiliado al gobierno de EE. UU."
+  },
+  "toolQuick": {
+    "title": "FAQ rápida",
+    "intro": "Respuestas rápidas a preguntas comunes. Para la fuente oficial, revisa las páginas del programa DV.",
+    "q1": {
+      "question": "¿Es un sitio oficial?",
+      "answer": "No. DV Photo Fix es independiente y no está afiliado al gobierno de EE. UU."
+    },
+    "q2": {
+      "question": "¿Esta herramienta garantiza la aceptación?",
+      "answer": "No. Ayuda con el formato y el encuadre, pero la aceptación la decide el proceso oficial."
+    },
+    "q3": {
+      "question": "¿La herramienta retoca mi cara o “embellece” la foto?",
+      "answer": "No. Solo aplica cambios geométricos seguros: recortar, centrar, enderezar, redimensionar y comprimir. Sin retoque facial."
+    }
+  }
+}

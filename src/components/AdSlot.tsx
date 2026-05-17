@@ -1,8 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { useTranslations } from "next-intl"
 
+import { useTranslations } from "@/i18n/I18nClientProvider"
 import { cn } from "@/lib/utils"
 
 export type AdSlotProps = {
@@ -14,13 +14,13 @@ export type AdSlotProps = {
 
 const DEFAULT_MIN_HEIGHT: Record<AdSlotProps["variant"], number> = {
   top: 90,
-  inline: 280,
-  footer: 120,
-  sidebar: 600,
+  inline: 220,
+  footer: 110,
+  sidebar: 520,
 }
 
 export function AdSlot({ variant, slot, className, minHeight }: AdSlotProps) {
-  const tAds = useTranslations("ads")
+  const tCommon = useTranslations("common")
   const [mounted, setMounted] = React.useState(false)
   const ref = React.useRef<HTMLElement | null>(null)
 
@@ -68,21 +68,24 @@ export function AdSlot({ variant, slot, className, minHeight }: AdSlotProps) {
   return (
     <section
       ref={ref}
-      aria-label={tAds("label")}
+      aria-label={tCommon("ads.label")}
       data-slot="ad-slot"
       className={cn(
-        "rounded-[12px] border border-slate-200 bg-slate-100 text-slate-900",
+        "rounded-[16px] border border-dashed border-[#CBD5E1] bg-[#F8FAFC] text-[#94A3B8]",
         variant === "sidebar" ? "px-4 py-4" : "px-5 py-5",
         className
       )}
       style={{ minHeight: resolvedMinHeight }}
     >
       <div className="flex items-center justify-between">
-        <div className="text-[12px] font-medium tracking-wide text-slate-700">{tAds("label")}</div>
-        <div className="text-[12px] text-slate-700">{mounted ? slot : tAds("loading")}</div>
+        <div className="text-[14px] font-medium tracking-wide text-[#94A3B8]">{tCommon("ads.label")}</div>
+        <div className="text-[12px] text-[#94A3B8]">{mounted ? slot : tCommon("ads.loading")}</div>
       </div>
-      <div className="mt-3 flex items-center justify-center rounded-[10px] border border-slate-200 bg-white" style={{ minHeight: Math.max(0, resolvedMinHeight - 48) }}>
-        <div className="text-center text-[13px] text-slate-500">{mounted ? "Reserved ad space" : ""}</div>
+      <div
+        className="mt-3 flex items-center justify-center rounded-[12px] border border-dashed border-[#CBD5E1] bg-white/60"
+        style={{ minHeight: Math.max(0, resolvedMinHeight - 44) }}
+      >
+        <div className="text-center text-[14px] text-[#94A3B8]">{mounted ? tCommon("ads.reserved") : ""}</div>
       </div>
     </section>
   )

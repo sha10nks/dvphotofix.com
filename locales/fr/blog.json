@@ -1,0 +1,35 @@
+{
+  "index": {
+    "title": "Blog DV Lottery",
+    "intro": "Conseils DV concis et pratiques basés sur des sources officielles. Chaque article renvoie vers l’outil pour formater votre photo DV en toute sécurité.",
+    "openTool": "Ouvrir l’outil",
+    "requirements": "Exigences photo",
+    "read": "Lire",
+    "back": "← Retour au blog"
+  },
+  "post": {
+    "ctaTitle": "Corrigez votre photo DV maintenant",
+    "ctaBody": "Vérifiez et corrigez votre photo DV avec l’outil. Formatage sûr uniquement : recadrer, centrer, redresser, redimensionner et compresser.",
+    "ctaButton": "Ouvrir l’outil",
+    "related": "Articles similaires"
+  },
+  "content": {
+    "fastAnswerTitle": "Réponse rapide",
+    "checkTitle": "À vérifier (avant l’envoi)",
+    "whyTitle": "Pourquoi ces vérifications comptent",
+    "mistakesTitle": "Erreurs courantes qui entraînent un refus",
+    "fixTitle": "Comment corriger en toute sécurité",
+    "checklistTitle": "Checklist rapide",
+    "breakdownTitle": "Détails (en langage clair)",
+    "breakdown1Title": "1) Spécifications techniques",
+    "breakdown2Title": "2) Cadrage et composition",
+    "breakdown3Title": "3) Arrière‑plan et éclairage",
+    "toolCanTitle": "Ce que l’outil peut faire",
+    "toolWontTitle": "Ce que l’outil ne fera pas",
+    "sourceTitle": "Notes sur les sources et la sécurité",
+    "nextTitle": "Que faire ensuite",
+    "nextTool": "Ouvrez l’outil pour recadrer et formater votre photo en toute sécurité",
+    "nextReq": "Consultez la page complète des exigences",
+    "nextRead": "Lire ensuite"
+  }
+}

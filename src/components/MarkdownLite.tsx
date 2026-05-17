@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { Link } from "@/i18n/navigation"
+import Link from "next/link"
 
 function isListItem(line: string) {
   return /^-\s+/.test(line)
@@ -75,7 +75,7 @@ export function MarkdownLite({ content }: { content: string }) {
 
     if (line.startsWith("### ")) {
       nodes.push(
-        <h3 key={`h3-${i}`} className="mt-8 text-lg font-semibold text-slate-900">
+        <h3 key={`h3-${i}`} className="mt-8 text-[20px] font-bold leading-snug text-[#0F172A]">
           {line.slice(4)}
         </h3>,
       )
@@ -83,7 +83,7 @@ export function MarkdownLite({ content }: { content: string }) {
     }
     if (line.startsWith("## ")) {
       nodes.push(
-        <h2 key={`h2-${i}`} className="mt-10 text-xl font-semibold text-slate-900">
+        <h2 key={`h2-${i}`} className="mt-10 text-[24px] font-bold leading-snug text-[#0F172A]">
           {line.slice(3)}
         </h2>,
       )
@@ -91,7 +91,7 @@ export function MarkdownLite({ content }: { content: string }) {
     }
     if (line.startsWith("# ")) {
       nodes.push(
-        <h1 key={`h1-${i}`} className="text-4xl font-semibold tracking-tight text-slate-900">
+        <h1 key={`h1-${i}`} className="text-4xl font-bold tracking-tight text-[#0F172A]">
           {line.slice(2)}
         </h1>,
       )
@@ -99,7 +99,7 @@ export function MarkdownLite({ content }: { content: string }) {
     }
 
     nodes.push(
-      <p key={`p-${i}`} className="mt-4 text-[15px] leading-7 text-slate-800">
+      <p key={`p-${i}`} className="mt-4 text-[18px] leading-[1.8] text-[#334155]">
         {renderInline(line)}
       </p>,
     )

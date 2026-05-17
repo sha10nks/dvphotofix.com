@@ -1,0 +1,7 @@
+{
+  "generic": {
+    "tryAgain": "Tente novamente.",
+    "required": "Este campo é obrigatório.",
+    "invalidEmail": "Digite um e-mail válido."
+  }
+}

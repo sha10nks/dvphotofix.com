@@ -1,0 +1,7 @@
+{
+  "generic": {
+    "tryAgain": "Please try again.",
+    "required": "This field is required.",
+    "invalidEmail": "Enter a valid email address."
+  }
+}

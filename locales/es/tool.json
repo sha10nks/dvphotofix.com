@@ -1,0 +1,49 @@
+{
+  "hero": {
+    "title": "Ajusta el encuadre de tu foto DV en minutos — directamente en tu navegador",
+    "subtitle": "Solo formato seguro: recortar, centrar, enderezar, redimensionar a 600×600 y comprimir por debajo de 239 kB. Sin embellecer. Sin cambiar el fondo.",
+    "primaryCta": "Empezar con la carga",
+    "secondaryCta": "Abrir páginas oficiales del programa DV",
+    "note": "Este sitio no es oficial, no está afiliado al gobierno de EE. UU. y no envía solicitudes. La aceptación final la decide el proceso oficial."
+  },
+  "tool": {
+    "title": "Herramienta de foto DV",
+    "uploadTitle": "Subir fotos",
+    "uploadHelp": "Sube 1–10 fotos. El procesamiento comienza automáticamente. Cada foto se formatea localmente con ajustes seguros.",
+    "downloadZip": "Descargar ZIP",
+    "clearAll": "Borrar todo",
+    "readyCount": "{ready}/{total} listas",
+    "emptyState": "Sube fotos para empezar."
+  },
+  "email": {
+    "title": "Recibe novedades de DV (opcional)",
+    "emailLabel": "Correo electrónico",
+    "placeholder": "name@example.com",
+    "consent": "Sí, pueden enviarme consejos para la foto de DV y novedades de la herramienta. Puedo darme de baja cuando quiera.",
+    "note": "Cero spam. Privacidad primero. Tu correo se mantiene privado.",
+    "submit": "Suscribirme",
+    "success": "¡Gracias! Ya estás suscrito/a."
+  },
+  "gate": {
+    "title": "Introduce tu correo para descargar",
+    "description": "Lo usamos para enviarte consejos de foto DV y novedades de la herramienta. Puedes darte de baja cuando quieras.",
+    "notice": "No subimos tus fotos para la herramienta principal. Este correo es solo para novedades."
+  },
+  "status": {
+    "queued": "En cola",
+    "uploading": "Subiendo…",
+    "analyzing": "Analizando…",
+    "issuesDetected": "Problemas detectados",
+    "checksCompleted": "Comprobaciones completadas",
+    "fixing": "Procesando…",
+    "finalizing": "Finalizando…",
+    "ready": "Listo",
+    "error": "Error"
+  },
+  "progress": {
+    "processing": "Procesando imágenes…"
+  },
+  "errors": {
+    "fixFailed": "Falló la corrección"
+  }
+}

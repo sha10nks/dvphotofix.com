@@ -1,0 +1,35 @@
+{
+  "index": {
+    "title": "DV Lottery blog",
+    "intro": "Concise, practical DV guidance aligned with DV Program sources. Every post links to the tool so you can fix and format your DV photo safely.",
+    "openTool": "Open the tool",
+    "requirements": "Photo requirements",
+    "read": "Read",
+    "back": "← Back to blog"
+  },
+  "post": {
+    "ctaTitle": "Fix your DV photo now",
+    "ctaBody": "Check and fix your DV photo using the tool. Safe formatting only: crop, center, straighten, resize, and compress.",
+    "ctaButton": "Open the tool",
+    "related": "Related"
+  },
+  "content": {
+    "fastAnswerTitle": "The fast answer",
+    "checkTitle": "What to check (before you upload)",
+    "whyTitle": "Why these checks matter",
+    "mistakesTitle": "Common mistakes that trigger rejection",
+    "fixTitle": "How to fix safely",
+    "checklistTitle": "Quick checklist",
+    "breakdownTitle": "Detailed breakdown (plain language)",
+    "breakdown1Title": "1) Technical specs",
+    "breakdown2Title": "2) Framing and composition",
+    "breakdown3Title": "3) Background and lighting",
+    "toolCanTitle": "What the tool can do",
+    "toolWontTitle": "What the tool will not do",
+    "sourceTitle": "Source and safety notes",
+    "nextTitle": "What to do next",
+    "nextTool": "Open the tool to reframe and format your photo safely",
+    "nextReq": "Review the full requirements page",
+    "nextRead": "Read next"
+  }
+}

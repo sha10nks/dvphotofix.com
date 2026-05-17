@@ -1,0 +1,56 @@
+{
+  "nav": {
+    "brand": "DV Photo Fix",
+    "tool": "Araç",
+    "requirements": "Gereksinimler",
+    "faq": "SSS",
+    "updates": "Güncellemeler",
+    "blog": "Blog"
+  },
+  "footer": {
+    "tagline": "Önce gizlilik: DV fotoğraf aracı.",
+    "pages": "Sayfalar",
+    "resources": "Kaynaklar",
+    "about": "Hakkında",
+    "privacy": "Gizlilik Politikası",
+    "terms": "Şartlar",
+    "disclaimer": "Sorumluluk reddi",
+    "contact": "İletişim",
+    "editorial": "Editoryal ve kaynaklar"
+  },
+  "language": {
+    "label": "Dil",
+    "ariaLabel": "Dil seç"
+  },
+  "actions": {
+    "openTool": "Aracı aç",
+    "subscribe": "Abone ol",
+    "dismiss": "Gizle",
+    "close": "Kapat",
+    "notNow": "Şimdi değil",
+    "continue": "Devam et"
+  },
+  "ads": {
+    "label": "Reklam",
+    "loading": "Yükleniyor…",
+    "reserved": "Reklam alanı ayrıldı"
+  },
+  "trust": {
+    "message": "Bağımsız site. ABD hükümeti ile bağlantılı değildir. Gereksinimleri resmi DV Program sayfalarından doğrulayın.",
+    "close": "Kapat"
+  },
+  "topbar": {
+    "title": "DV fotoğraf ipuçları ve güncellemeleri alın",
+    "placeholder": "name@example.com"
+  },
+  "disclaimer": {
+    "title": "Önemli uyarı",
+    "item1": "Bu site bağımsızdır ve ABD hükümeti ile bağlantılı değildir.",
+    "item2": "Bu site sizin yerinize DV başvurusu göndermez.",
+    "item3": "Hiçbir araç kabulü garanti edemez.",
+    "item4": "Bu bilgiler resmi talimatların yerine geçmez.",
+    "item5": "Güncel kuralları her zaman resmi DV Program sayfalarından doğrulayın.",
+    "note": "Kaynak olarak ABD Dışişleri Bakanlığı DV Program sayfalarını kullanın.",
+    "openSources": "Resmi DV Program sayfalarını aç"
+  }
+}

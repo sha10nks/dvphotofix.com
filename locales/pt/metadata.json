@@ -1,0 +1,17 @@
+{
+  "site": {
+    "name": "DV Photo Fix",
+    "defaultTitle": "DV Photo Fix",
+    "defaultDescription": "Ferramenta de foto DV: recorte, centralize e ajuste para 600×600 corretamente."
+  },
+  "pages": {
+    "tool": {
+      "title": "Ferramenta de Foto DV — Recortar, centralizar, redimensionar, comprimir (600×600 JPEG)",
+      "description": "Prepare sua foto DV localmente no navegador. Apenas ajustes seguros: recortar, centralizar, endireitar, redimensionar e comprimir. Não afiliado ao governo dos EUA."
+    },
+    "blog": {
+      "title": "Blog da Loteria DV",
+      "description": "Guia conciso de DV e dicas de foto alinhadas com fontes oficiais."
+    }
+  }
+}

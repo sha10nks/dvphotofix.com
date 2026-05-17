@@ -108,9 +108,9 @@ function renderArticle(args: {
     "This website is not affiliated with the U.S. government. The DV Program source pages are the only source of truth for requirements and timelines. This content is written to be concise and practical, and to help you avoid the most common photo formatting and framing mistakes.",
     "",
     "## What to do next",
-    `- Open the tool to reframe and format your photo safely: [DV photo tool](/en/tool/)`,
-    `- Review the full requirements page: [Photo requirements](/en/photo-requirements/)`,
-    `- Read next: [${args.related.title}](/en${args.related.href}/)`,
+    `- Open the tool to reframe and format your photo safely: [DV photo tool](/tool/)`,
+    `- Review the full requirements page: [Photo requirements](/photo-requirements/)`,
+    `- Read next: [${args.related.title}](${args.related.href})`,
   ]
 
   return body.join("\n")
@@ -463,7 +463,7 @@ export const blogPosts: BlogPost[] = (() => {
       keyPoints: t.keyPoints,
       mistakes: t.mistakes,
       checklist: t.checklist,
-      related: { title: related.title, href: `/blog/${related.slug}` },
+      related: { title: related.title, href: `/blog/${related.slug}/` },
     })
     const metaTitle = toMetaTitle(`${title} | DV Photo Fix`)
     const metaDescription = toMetaDescription(

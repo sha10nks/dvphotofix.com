@@ -1,0 +1,35 @@
+{
+  "index": {
+    "title": "Blog de la Lotería DV",
+    "intro": "Guía práctica y concisa de DV basada en fuentes oficiales. Cada artículo enlaza a la herramienta para formatear tu foto DV con seguridad.",
+    "openTool": "Abrir la herramienta",
+    "requirements": "Requisitos de la foto",
+    "read": "Leer",
+    "back": "← Volver al blog"
+  },
+  "post": {
+    "ctaTitle": "Arregla tu foto DV ahora",
+    "ctaBody": "Revisa y arregla tu foto DV con la herramienta. Solo formato seguro: recortar, centrar, enderezar, redimensionar y comprimir.",
+    "ctaButton": "Abrir la herramienta",
+    "related": "Relacionado"
+  },
+  "content": {
+    "fastAnswerTitle": "La respuesta rápida",
+    "checkTitle": "Qué comprobar (antes de subir)",
+    "whyTitle": "Por qué importa comprobarlo",
+    "mistakesTitle": "Errores comunes que causan rechazo",
+    "fixTitle": "Cómo arreglarlo de forma segura",
+    "checklistTitle": "Lista rápida",
+    "breakdownTitle": "Desglose detallado (en lenguaje claro)",
+    "breakdown1Title": "1) Especificaciones técnicas",
+    "breakdown2Title": "2) Encuadre y composición",
+    "breakdown3Title": "3) Fondo e iluminación",
+    "toolCanTitle": "Qué puede hacer la herramienta",
+    "toolWontTitle": "Qué no hará la herramienta",
+    "sourceTitle": "Notas de fuentes y seguridad",
+    "nextTitle": "Qué hacer a continuación",
+    "nextTool": "Abre la herramienta para reencuadrar y formatear tu foto con seguridad",
+    "nextReq": "Revisa la página completa de requisitos",
+    "nextRead": "Leer después"
+  }
+}

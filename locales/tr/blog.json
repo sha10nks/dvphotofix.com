@@ -1,0 +1,35 @@
+{
+  "index": {
+    "title": "DV Blogu",
+    "intro": "Resmi kaynaklarla uyumlu, kısa ve pratik DV içerikleri. Her yazı, DV fotoğrafını güvenle biçimlendirmek için araca bağlantı içerir.",
+    "openTool": "Aracı aç",
+    "requirements": "Foto gereksinimleri",
+    "read": "Oku",
+    "back": "← Bloga dön"
+  },
+  "post": {
+    "ctaTitle": "DV fotoğrafını şimdi düzelt",
+    "ctaBody": "DV fotoğrafını araçla kontrol et ve düzelt. Yalnızca güvenli işlemler: kırp, ortala, düzelt, boyutlandır ve sıkıştır.",
+    "ctaButton": "Aracı aç",
+    "related": "İlgili"
+  },
+  "content": {
+    "fastAnswerTitle": "Kısa cevap",
+    "checkTitle": "Yüklemeden önce neleri kontrol etmeli",
+    "whyTitle": "Neden önemli",
+    "mistakesTitle": "Reddedilmeye yol açan yaygın hatalar",
+    "fixTitle": "Güvenle nasıl düzeltilir",
+    "checklistTitle": "Hızlı kontrol listesi",
+    "breakdownTitle": "Detaylı açıklama (sade dille)",
+    "breakdown1Title": "1) Teknik özellikler",
+    "breakdown2Title": "2) Kadraj ve kompozisyon",
+    "breakdown3Title": "3) Arka plan ve ışık",
+    "toolCanTitle": "Araç ne yapabilir",
+    "toolWontTitle": "Araç ne yapmaz",
+    "sourceTitle": "Kaynak ve güvenlik notları",
+    "nextTitle": "Sonraki adım",
+    "nextTool": "Fotoğrafını güvenle kadrajlamak ve biçimlendirmek için aracı aç",
+    "nextReq": "Gereksinimlerin tamamını incele",
+    "nextRead": "Sıradaki yazı"
+  }
+}

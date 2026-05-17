@@ -1,0 +1,17 @@
+{
+  "site": {
+    "name": "DV Photo Fix",
+    "defaultTitle": "DV Photo Fix",
+    "defaultDescription": "DV foto aracı: kırp, ortala ve 600×600'e doğru şekilde yeniden boyutlandır."
+  },
+  "pages": {
+    "tool": {
+      "title": "DV Foto Aracı — Kırp, Ortala, Boyutlandır, Sıkıştır (600×600 JPEG)",
+      "description": "DV fotoğrafını tarayıcında yerel olarak hazırla. Yalnızca güvenli işlemler: kırp, ortala, düzelt, boyutlandır, sıkıştır. ABD hükümeti ile bağlantılı değildir."
+    },
+    "blog": {
+      "title": "DV Blogu",
+      "description": "Resmi kaynaklarla uyumlu, kısa DV rehberi ve foto ipuçları."
+    }
+  }
+}

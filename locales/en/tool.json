@@ -1,0 +1,49 @@
+{
+  "hero": {
+    "title": "Fix your DV Lottery photo framing in minutes — right in your browser",
+    "subtitle": "Safe formatting only: crop, center, straighten, resize to 600×600, and compress under 239 kB. No beautification. No background replacement.",
+    "primaryCta": "Start with upload",
+    "secondaryCta": "Open DV Program source pages",
+    "note": "This site is not official, not affiliated with the U.S. government, and does not submit applications. Final acceptance is decided by the official review process."
+  },
+  "tool": {
+    "title": "DV photo tool",
+    "uploadTitle": "Upload photos",
+    "uploadHelp": "Upload 1–10 photos. Processing starts automatically. Each photo is formatted locally using safe transforms only.",
+    "downloadZip": "Download ZIP",
+    "clearAll": "Clear all",
+    "readyCount": "{ready}/{total} ready",
+    "emptyState": "Upload photos to begin."
+  },
+  "email": {
+    "title": "Get DV updates (optional)",
+    "emailLabel": "Email",
+    "placeholder": "name@example.com",
+    "consent": "Yes, you can email me DV photo tips and tool updates. I can unsubscribe anytime.",
+    "note": "No spam. Privacy-first. Your email stays private.",
+    "submit": "Subscribe",
+    "success": "Thanks! You’re subscribed."
+  },
+  "gate": {
+    "title": "Enter your email to download",
+    "description": "We’ll use it to send DV photo tips and tool updates. Unsubscribe anytime.",
+    "notice": "We don’t upload your photos for the core tool. This email is only for updates."
+  },
+  "status": {
+    "queued": "Queued",
+    "uploading": "Uploading…",
+    "analyzing": "Analyzing…",
+    "issuesDetected": "Issues detected",
+    "checksCompleted": "Checks completed",
+    "fixing": "Processing…",
+    "finalizing": "Finalizing…",
+    "ready": "Done",
+    "error": "Error"
+  },
+  "progress": {
+    "processing": "Processing images…"
+  },
+  "errors": {
+    "fixFailed": "Fix failed"
+  }
+}

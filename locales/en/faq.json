@@ -1,0 +1,22 @@
+{
+  "page": {
+    "title": "FAQ",
+    "intro": "Fast answers aligned with DV Program guidance. This site is independent and not affiliated with the U.S. government."
+  },
+  "toolQuick": {
+    "title": "Quick FAQ",
+    "intro": "Quick answers to common questions. For the source of truth, use official DV Program pages.",
+    "q1": {
+      "question": "Is this an official website?",
+      "answer": "No. DV Photo Fix is independent and not affiliated with the U.S. government."
+    },
+    "q2": {
+      "question": "Does this tool guarantee acceptance?",
+      "answer": "No. It helps with formatting and framing, but acceptance is decided by the official review process."
+    },
+    "q3": {
+      "question": "Does the tool edit my face or “beautify” my photo?",
+      "answer": "No. It only applies safe geometric changes: crop, center, straighten, resize, and compress. No facial retouching."
+    }
+  }
+}

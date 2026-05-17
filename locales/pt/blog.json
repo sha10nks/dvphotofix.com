@@ -1,0 +1,35 @@
+{
+  "index": {
+    "title": "Blog da Loteria DV",
+    "intro": "Conteúdo conciso e prático sobre DV, alinhado com fontes oficiais. Cada post leva à ferramenta para formatar sua foto DV com segurança.",
+    "openTool": "Abrir a ferramenta",
+    "requirements": "Requisitos da foto",
+    "read": "Ler",
+    "back": "← Voltar ao blog"
+  },
+  "post": {
+    "ctaTitle": "Ajuste sua foto DV agora",
+    "ctaBody": "Verifique e ajuste sua foto DV usando a ferramenta. Apenas formatação segura: recortar, centralizar, endireitar, redimensionar e comprimir.",
+    "ctaButton": "Abrir a ferramenta",
+    "related": "Relacionado"
+  },
+  "content": {
+    "fastAnswerTitle": "Resposta rápida",
+    "checkTitle": "O que verificar (antes de enviar)",
+    "whyTitle": "Por que isso importa",
+    "mistakesTitle": "Erros comuns que causam rejeição",
+    "fixTitle": "Como corrigir com segurança",
+    "checklistTitle": "Checklist rápida",
+    "breakdownTitle": "Explicação detalhada (linguagem simples)",
+    "breakdown1Title": "1) Especificações técnicas",
+    "breakdown2Title": "2) Enquadramento e composição",
+    "breakdown3Title": "3) Fundo e iluminação",
+    "toolCanTitle": "O que a ferramenta pode fazer",
+    "toolWontTitle": "O que a ferramenta não faz",
+    "sourceTitle": "Notas de fonte e segurança",
+    "nextTitle": "Próximos passos",
+    "nextTool": "Abra a ferramenta para reenquadrar e formatar sua foto com segurança",
+    "nextReq": "Veja a página completa de requisitos",
+    "nextRead": "Ler a seguir"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "site": {
+    "name": "DV Photo Fix",
+    "defaultTitle": "DV Photo Fix",
+    "defaultDescription": "Outil photo DV : recadrer, centrer et redimensionner correctement en 600×600."
+  },
+  "pages": {
+    "tool": {
+      "title": "Outil photo DV — Recadrer, centrer, redimensionner, compresser (600×600 JPEG)",
+      "description": "Préparez une photo DV localement dans votre navigateur. Modifications sûres uniquement : recadrer, centrer, redresser, redimensionner, compresser. Non affilié au gouvernement des États‑Unis."
+    },
+    "blog": {
+      "title": "Blog DV Lottery",
+      "description": "Conseils DV concis et astuces photo alignés sur les sources officielles."
+    }
+  }
+}

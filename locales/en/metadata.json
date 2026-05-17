@@ -1,0 +1,17 @@
+{
+  "site": {
+    "name": "DV Photo Fix",
+    "defaultTitle": "DV Photo Fix",
+    "defaultDescription": "DV Lottery photo tool: crop, center, resize to 600x600 correctly."
+  },
+  "pages": {
+    "tool": {
+      "title": "DV Photo Tool — Crop, Center, Resize, Compress (600×600 JPEG)",
+      "description": "Prepare a DV Lottery photo locally in your browser. Safe transforms only: crop, center, straighten, resize, compress. Not affiliated with the U.S. government."
+    },
+    "blog": {
+      "title": "DV Lottery Blog",
+      "description": "Concise DV Lottery guidance and photo tips aligned with DV Program sources."
+    }
+  }
+}

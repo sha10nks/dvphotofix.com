@@ -1,10 +1,14 @@
-import { useTranslations } from "next-intl"
+"use client"
 
-import { Link } from "@/i18n/navigation"
+import Link from "next/link"
+
+import { useLocale, useTranslations } from "@/i18n/I18nClientProvider"
+import { withLocale } from "@/i18n/paths"
 import { AdSlot } from "@/components/AdSlot"
 
 export function SiteFooter() {
-  const tNav = useTranslations("nav")
+  const locale = useLocale()
+  const tCommon = useTranslations("common")
 
   return (
     <footer className="border-t border-blue-900/10 bg-blue-900 text-white">
@@ -15,42 +19,42 @@ export function SiteFooter() {
 
         <div className="grid gap-10 md:grid-cols-[1fr_1fr_1fr]">
           <div className="space-y-3">
-            <div className="text-base font-semibold tracking-tight">DV Photo Fix</div>
-            <p className="max-w-sm text-[15px] leading-7 text-blue-50/90">Privacy-first DV photo utility.</p>
+            <div className="text-base font-semibold tracking-tight">{tCommon("nav.brand")}</div>
+            <p className="max-w-sm text-[15px] leading-7 text-blue-50/90">{tCommon("footer.tagline")}</p>
           </div>
 
           <div className="space-y-3">
-            <div className="text-[13px] font-semibold uppercase tracking-wider text-blue-100/90">Pages</div>
+            <div className="text-[13px] font-semibold uppercase tracking-wider text-blue-100/90">{tCommon("footer.pages")}</div>
             <div className="grid gap-2 text-[15px]">
-              <Link href="/about" className="text-white/90 hover:text-white">
-                {tNav("about")}
+              <Link href={withLocale(locale, "/about/")} className="text-white/90 hover:text-white">
+                {tCommon("footer.about")}
               </Link>
-              <Link href="/privacy" className="text-white/90 hover:text-white">
-                Privacy Policy
+              <Link href={withLocale(locale, "/privacy/")} className="text-white/90 hover:text-white">
+                {tCommon("footer.privacy")}
               </Link>
-              <Link href="/terms" className="text-white/90 hover:text-white">
-                Terms
+              <Link href={withLocale(locale, "/terms/")} className="text-white/90 hover:text-white">
+                {tCommon("footer.terms")}
               </Link>
-              <Link href="/disclaimer" className="text-white/90 hover:text-white">
-                Disclaimer
+              <Link href={withLocale(locale, "/disclaimer/")} className="text-white/90 hover:text-white">
+                {tCommon("footer.disclaimer")}
               </Link>
-              <Link href="/contact" className="text-white/90 hover:text-white">
-                {tNav("contact")}
+              <Link href={withLocale(locale, "/contact/")} className="text-white/90 hover:text-white">
+                {tCommon("footer.contact")}
               </Link>
             </div>
           </div>
 
           <div className="space-y-3">
-            <div className="text-[13px] font-semibold uppercase tracking-wider text-blue-100/90">Resources</div>
+            <div className="text-[13px] font-semibold uppercase tracking-wider text-blue-100/90">{tCommon("footer.resources")}</div>
             <div className="grid gap-2 text-[15px]">
-              <Link href="/updates" className="text-white/90 hover:text-white">
-                {tNav("updates")}
+              <Link href={withLocale(locale, "/updates/")} className="text-white/90 hover:text-white">
+                {tCommon("nav.updates")}
               </Link>
-              <Link href="/faq" className="text-white/90 hover:text-white">
-                {tNav("faq")}
+              <Link href={withLocale(locale, "/faq/")} className="text-white/90 hover:text-white">
+                {tCommon("nav.faq")}
               </Link>
-              <Link href="/editorial" className="text-white/90 hover:text-white">
-                Editorial & Sources
+              <Link href={withLocale(locale, "/editorial/")} className="text-white/90 hover:text-white">
+                {tCommon("footer.editorial")}
               </Link>
             </div>
           </div>

@@ -1,0 +1,56 @@
+{
+  "nav": {
+    "brand": "DV Photo Fix",
+    "tool": "Tool",
+    "requirements": "Requirements",
+    "faq": "FAQ",
+    "updates": "Updates",
+    "blog": "Blog"
+  },
+  "footer": {
+    "tagline": "Privacy-first DV photo utility.",
+    "pages": "Pages",
+    "resources": "Resources",
+    "about": "About",
+    "privacy": "Privacy Policy",
+    "terms": "Terms",
+    "disclaimer": "Disclaimer",
+    "contact": "Contact",
+    "editorial": "Editorial & Sources"
+  },
+  "language": {
+    "label": "Language",
+    "ariaLabel": "Select language"
+  },
+  "actions": {
+    "openTool": "Open the tool",
+    "subscribe": "Subscribe",
+    "dismiss": "Dismiss",
+    "close": "Close",
+    "notNow": "Not now",
+    "continue": "Continue"
+  },
+  "ads": {
+    "label": "Advertisement",
+    "loading": "Loading…",
+    "reserved": "Reserved ad space"
+  },
+  "trust": {
+    "message": "Independent site. Not affiliated with the U.S. government. Always verify requirements on official DV Program pages.",
+    "close": "Close"
+  },
+  "topbar": {
+    "title": "Get DV photo tips and updates",
+    "placeholder": "name@example.com"
+  },
+  "disclaimer": {
+    "title": "Important disclaimer",
+    "item1": "This site is independent and not affiliated with the U.S. government.",
+    "item2": "This site does not submit DV entries for you.",
+    "item3": "No tool can guarantee acceptance.",
+    "item4": "This information does not replace official instructions.",
+    "item5": "Always verify current rules on official DV Program pages.",
+    "note": "Use U.S. Department of State DV Program pages as your source of truth.",
+    "openSources": "Open DV Program source pages"
+  }
+}
